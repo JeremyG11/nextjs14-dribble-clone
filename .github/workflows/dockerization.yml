@@ -1,1 +1,32 @@
+name: next14-dribble-clone-CICD
 
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build docker image
+        run: docker build -t gatwechpeter/next14-dribble-clone .
+
+      - name: Publish image to docker hub
+        run: docker push gatwechpeter/next14-dribble-clone:latest
+
+  # deploy:
+  #   needs: build
+  #   runs-on: [aws-ec2]
+  #   steps:
+  #     - name: Pull image from docker hub
+  #       run: docker pull gatwechpeter/next14-dribble-clone:latest
+  #     - name: Delete old container
+  #       run: docker rm -f next14-dribble-clone-container
+  #     - name: Run docker container
+  #       run: docker run -d -p 5000:5000 --name next14-dribble-clone-container gatwechpeter/next14-dribble-clone
