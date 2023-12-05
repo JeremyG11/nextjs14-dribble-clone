@@ -14,12 +14,6 @@ RUN npm install
 COPY . .
 
 
-# Explicitly copy necessary directories
-COPY ./public ./public
-COPY ./app ./app
-COPY ./components ./components
-COPY ./libs ./libs
-
 # Install only production dependencies
 RUN npm install --production
 
