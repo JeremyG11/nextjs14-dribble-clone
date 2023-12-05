@@ -1,5 +1,5 @@
-import Navbar from "@/components/Navbar";
 import React from "react";
+import Navbar from "@/components/Navbar";
 
 export default function MainLayout({
   children,
@@ -7,9 +7,9 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <Navbar />
-      {children}
+      <div className="xl:px-16">{children}</div>
     </div>
   );
 }
