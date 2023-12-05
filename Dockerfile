@@ -21,7 +21,7 @@ RUN npm install --production
 RUN npx prisma generate
 
 # Build the application
-# RUN npm run build
+RUN npm run build
 
 # Stage 2: create a smaller image for production
 FROM node:20.10-alpine AS production
