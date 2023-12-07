@@ -92,10 +92,9 @@ export default () => {
         </div>
         <div className="flex p-2 space-x-2 gap-x-2 md:gap-x-6 items-center justify-end space-y-0 md:flex md:space-y-0 md:mt-0">
           <SearchBar />
-          <Button
-            title="Share work"
-            styles="hidden py-3 px-6 font-medium text-gray-900  xl:block rounded-full border border-gray-200"
-          />
+          <Button styles="hidden py-3 px-6 font-medium text-gray-900  xl:block rounded-full border border-gray-200">
+            Share work
+          </Button>
           <div className="rounded-full h-10 w-10 xl:w-11 xl:h-11">
             <UserButton
               afterSignOutUrl="/"

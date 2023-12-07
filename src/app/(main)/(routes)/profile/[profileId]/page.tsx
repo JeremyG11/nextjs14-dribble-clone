@@ -27,10 +27,9 @@ export default function Profile() {
             <p className="mt-3 text-gray-600">Addis Ababa</p>
           </div>
           <div className="flex gap-3 items-center mt-4 ">
-            <Button
-              title="Edit Profile"
-              styles="py-3 px-6 font-medium text-gray-900  xl:block rounded-full border border-gray-200"
-            />
+            <Button styles="py-3 px-6 font-medium text-gray-900  xl:block rounded-full border border-gray-200">
+              Edit Profile
+            </Button>
             <DropDown />
 
             <TooltipButton
@@ -47,10 +46,9 @@ export default function Profile() {
                 </div>
               }
             >
-              <Button
-                title="Limitted account"
-                styles="font-bold text-xs p-2 px-3 bg-indigo-50 text-indigo-500 uppercase xl:block rounded-full"
-              />
+              <Button styles="cursor-pointer font-bold text-xs p-2 px-3 bg-indigo-50 text-indigo-500 uppercase xl:block rounded-full">
+                Limitted account
+              </Button>
             </TooltipButton>
           </div>
         </div>

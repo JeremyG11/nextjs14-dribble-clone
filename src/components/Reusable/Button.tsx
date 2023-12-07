@@ -1,17 +1,16 @@
 import React from "react";
 
 interface ButtonProps {
-  title: string;
   styles: string;
+  children: React.ReactNode;
 }
-export function Button({ title, styles }: ButtonProps) {
+export function Button({ styles, children }: ButtonProps) {
   return (
     <button
       type="button"
-      className={`${styles}`}
-      //   className=
+      className={`cursor-pointer xl:block rounded-full ${styles}`}
     >
-      {title}
+      {children}
     </button>
   );
 }

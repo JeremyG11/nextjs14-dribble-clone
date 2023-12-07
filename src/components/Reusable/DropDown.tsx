@@ -23,17 +23,23 @@ export default function DropDown() {
         <HiOutlineEllipsisHorizontal className="text-2xl" />
       </button>
       {isMenuOpen && (
-        <div className="absolute left-0 z-10 mt-2 w-56 rounded-md border border-gray-100 bg-white ">
-          <div className="p-2">
-            <ul>
+        <div className="absolute left-0 z-10 mt-2 w-48 rounded-md border border-gray-100 text-gray-500 shadow-sm">
+          <div className="">
+            <ul className="p-2">
               <li>
-                <Link href="">Add or remove from the lists</Link>
+                <Link href="" className="text-[13px] truncate">
+                  Add or remove from the lists
+                </Link>
               </li>
               <li>
-                <Link href="">Edit your account settings</Link>
+                <Link href="" className="text-[13px] truncate">
+                  Edit your account settings
+                </Link>
               </li>
               <li>
-                <Link href="">Edit your work preferences</Link>
+                <Link href="" className="text-[13px] truncate">
+                  Edit your work preferences
+                </Link>
               </li>
             </ul>
           </div>
