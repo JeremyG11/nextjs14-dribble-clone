@@ -17,8 +17,8 @@ export default function ButtonTabs() {
               { title: "Collections" },
               { title: "Liked Shots" },
               { title: "About" },
-            ].map((item) => (
-              <ul className=" items-center inline-flex">
+            ].map((item, i) => (
+              <ul key={i} className=" items-center inline-flex">
                 <button className="mx-6">{item.title}</button>
               </ul>
             ))}
@@ -73,8 +73,10 @@ export default function ButtonTabs() {
         </nav>
       </div>
       <div className="grid grid-cols-3">
-        {[3, 6, 8, 7, 34, 9].map(() => (
-          <ShotCard />
+        {[3, 6, 8, 7, 34, 9].map((btn, i) => (
+          <div key={i}>
+            <ShotCard key={btn} />
+          </div>
         ))}
       </div>
     </div>
