@@ -46,7 +46,7 @@ export default function Navbar() {
         >
           <ul className="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
             {[
-              { title: "Find talent", path: "#" },
+              { title: "Find talent", path: "hiring" },
               { title: "Inspirations", path: "#" },
             ].map((item, idx) => {
               return (

@@ -6,3 +6,25 @@
 body {
   /* font-family: "Mona Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; */
 }
+
+.change-bg-color {
+  animation: changeColor 60s linear infinite;
+}
+
+@keyframes changeColor {
+  0% {
+    background-color: #ff000081;
+  }
+  25% {
+    background-color: #3169316e;
+  }
+  50% {
+    background-color: #0000ff77;
+  }
+  75% {
+    background-color: #ffff007a;
+  }
+  100% {
+    background-color: #ff00ff;
+  }
+}

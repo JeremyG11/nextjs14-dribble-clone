@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import { Button } from "@/components/Reusable/Button";
 import { InfiniteScrollCards } from "@/components/Home/InfiniteScrollCards";
 import ShotCard from "@/components/Home/ShotCard";
+import CTA1 from "@/components/Home/CTA1";
 
 const font = Source_Serif_4({
   subsets: ["greek"],
@@ -18,7 +19,7 @@ export default function Home() {
         <div className="p-8 lg:px-16 lg:pt-16">
           <div className="mx-auto max-w-4xl text-center space-y-10">
             <span
-              className={`${font.className} mx-auto p-2.5 px-4 font-medium whitespace-nowrap rounded-full bg-purple-100 nimate-background`}
+              className={`${font.className} mx-auto p-2.5 px-4 font-medium whitespace-nowrap rounded-full bg-purple-100 change-bg-color `}
             >
               Over 3 million ready-to-work creatives!
             </span>
@@ -61,12 +62,8 @@ export default function Home() {
             </Button>
           </div>
         </div>
+        <CTA1 />
       </section>
     </>
   );
 }
-
-{
-  /* <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&amp;family=IBM+Plex+Mono:wght@500&amp;display=block" rel="stylesheet"></link> */
-}
-// className="hover:animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s]"

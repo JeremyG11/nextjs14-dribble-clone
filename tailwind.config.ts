@@ -16,6 +16,9 @@ const config: Config = {
       fontFamily: {
         source: ["Source Serif 4", "Georgia", "serif"],
       },
+      colors: {
+        primary: "#d145bf",
+      },
       backgroundColor: {
         primary: "#0d0c22",
       },

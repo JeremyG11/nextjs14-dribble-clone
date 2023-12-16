@@ -56,7 +56,7 @@ export const InfiniteScrollCards = () => {
         {cardData.map((card, i) => (
           <li
             key={i}
-            className="relative  w-72 h-80 rounded-3xl overflow-hidden bg-black"
+            className="relative  w-72 h-80 rounded-3xl overflow-hidden bg-black "
           >
             {card.media.type === "video" ? (
               <video className="object-cover w-full h-full" autoPlay loop muted>

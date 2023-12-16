@@ -9,7 +9,7 @@ export default function FooterScrolingCards() {
       const ul = cardRef.current;
       ul.insertAdjacentHTML("afterend", ul.outerHTML);
 
-      const nextSiblingElement = ul.nextSibling as HTMLElement | null;
+      const nextSiblingElement = ul.nextSibling as HTMLUListElement | null;
 
       if (nextSiblingElement) {
         nextSiblingElement.setAttribute("aria-hidden", "true");
@@ -18,24 +18,24 @@ export default function FooterScrolingCards() {
   }, []);
   const cardData = [
     {
-      name: "Ledia Yohanis",
+      name: "Illustrations",
       image:
-        "https://cdn.dribbble.com/uploads/47181/original/1e3a73a174484bef522b620c401cd00a.mp4?1685645427",
+        "https://images.unsplash.com/photo-1590176028506-b8324faaa8bf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzJ8fGRlc2lnbmVyfGVufDB8fDB8fHww",
+    },
+    {
+      name: "Web Designs",
+      image:
+        "https://images.unsplash.com/photo-1590176028506-b8324faaa8bf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzJ8fGRlc2lnbmVyfGVufDB8fDB8fHww",
+    },
+    {
+      name: "Animations",
+      image:
+        "https://images.unsplash.com/photo-1590176028506-b8324faaa8bf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzJ8fGRlc2lnbmVyfGVufDB8fDB8fHww",
     },
     {
       name: "Ledia Yohanis",
       image:
-        "https://cdn.dribbble.com/uploads/47181/original/1e3a73a174484bef522b620c401cd00a.mp4?1685645427",
-    },
-    {
-      name: "Ledia Yohanis",
-      image:
-        "https://cdn.dribbble.com/uploads/47181/original/1e3a73a174484bef522b620c401cd00a.mp4?1685645427",
-    },
-    {
-      name: "Ledia Yohanis",
-      image:
-        "https://cdn.dribbble.com/uploads/47181/original/1e3a73a174484bef522b620c401cd00a.mp4?1685645427",
+        "https://images.unsplash.com/photo-1590176028506-b8324faaa8bf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzJ8fGRlc2lnbmVyfGVufDB8fDB8fHww",
     },
   ];
 
@@ -47,14 +47,14 @@ export default function FooterScrolingCards() {
       >
         {cardData.map((card, i) => (
           <li key={i} className="relative p-4 ">
-            <div className="w-56 h-40 rounded-xl overflow-hidden">
+            <div className="w-44 h-32 rounded-xl overflow-hidden">
               <img
                 src={card.image}
                 alt="card image"
                 className="object-cover w-full h-full"
               />
             </div>
-            <span className="mt-4 text-gray-500"> {card.name}</span>
+            <p className="mt-4 text-gray-800 text-sm"> {card.name}</p>
           </li>
         ))}
       </ul>
