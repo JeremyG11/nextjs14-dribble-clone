@@ -8,7 +8,7 @@ const font = Source_Serif_4({
   weight: ["200", "300", "400", "500", "600", "700"],
 });
 
-export default function CTA1() {
+export default function CTAHome1() {
   return (
     <div className=" max-w-full h-screen text-center flex items-center justify-center bg-[#ffda79] pt-10 pb-20 mt-20">
       <div className="max-w-xl space-y-8">

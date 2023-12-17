@@ -56,10 +56,7 @@ export default function Footer() {
             ].map((item, index) => {
               return (
                 <li key={index}>
-                  <Link
-                    href="/"
-                    className="text-primary transition hover:text-gray-700/75"
-                  >
+                  <Link href="/" className="transition hover:text-gray-700/75">
                     {item?.icon}
                   </Link>
                 </li>

@@ -1,10 +1,11 @@
 import { Source_Serif_4 } from "next/font/google";
 
 import Navbar from "@/components/Navbar";
+import Badge from "@/components/Reusable/Badge";
+import CTAHome1 from "@/components/Home/CTAHome1";
+import ShotCard from "@/components/Home/ShotCard";
 import { Button } from "@/components/Reusable/Button";
 import { InfiniteScrollCards } from "@/components/Home/InfiniteScrollCards";
-import ShotCard from "@/components/Home/ShotCard";
-import CTA1 from "@/components/Home/CTA1";
 
 const font = Source_Serif_4({
   subsets: ["greek"],
@@ -18,11 +19,11 @@ export default function Home() {
       <section className="pb-20">
         <div className="p-8 lg:px-16 lg:pt-16">
           <div className="mx-auto max-w-4xl text-center space-y-10">
-            <span
-              className={`${font.className} mx-auto p-2.5 px-4 font-medium whitespace-nowrap rounded-full bg-purple-100 change-bg-color `}
-            >
-              Over 3 million ready-to-work creatives!
-            </span>
+            <Badge
+              text="Over 3 million ready-to-work creatives!"
+              className="mx-auto p-2.5 px-4 font-medium whitespace-nowrap rounded-full change-bg-color"
+            />
+
             <h2
               className={`text-7xl mt-5 ${font.className} text-gray-900 md:text-7xl`}
             >
@@ -62,7 +63,7 @@ export default function Home() {
             </Button>
           </div>
         </div>
-        <CTA1 />
+        <CTAHome1 />
       </section>
     </>
   );

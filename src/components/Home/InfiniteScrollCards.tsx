@@ -78,7 +78,10 @@ export const InfiniteScrollCards = () => {
 
               <div className="flex items-center">
                 {card.skills.map((skill) => (
-                  <button className=" mr-2 p-1 px-2 rounded-full text-xs border text-white duration-150">
+                  <button
+                    key={skill}
+                    className=" mr-2 p-1 px-2 rounded-full text-xs border text-white duration-150"
+                  >
                     {skill}
                   </button>
                 ))}
