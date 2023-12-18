@@ -40,24 +40,44 @@ export default function FooterScrolingCards() {
   ];
 
   return (
-    <div className="w-full inline-flex flex-nowrap">
-      <ul
-        className="flex items-center justify-center md:justify-start [&_li]:mx-0 [&_img]:max-w-none animate-infinite-scroll"
-        ref={cardRef}
-      >
-        {cardData.map((card, i) => (
-          <li key={i} className="relative p-4 ">
-            <div className="w-44 h-32 rounded-xl overflow-hidden">
-              <img
-                src={card.image}
-                alt="card image"
-                className="object-cover w-full h-full"
-              />
-            </div>
-            <p className="mt-4 text-gray-800 text-sm"> {card.name}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="flex overflow-hidden group">
+        <ul
+          ref={cardRef}
+          className="flex animate-infinite-scroll group-hover:paused md:justify-start [&_li]:mx-4 [&_img]:max-w-none"
+        >
+          {cardData.map((card, i) => (
+            <li key={i} className="relative cursor-pointer">
+              <div className="w-44 h-32 rounded-xl overflow-hidden">
+                <img
+                  src={card.image}
+                  alt="card image"
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <p className="mt-4 text-gray-800 text-sm"> {card.name}</p>
+            </li>
+          ))}
+        </ul>
+        <ul
+          ref={cardRef}
+          className="flex animate-infinite-scroll group-hover:paused md:justify-start [&_li]:mx-4 [&_img]:max-w-none"
+          aria-hidden="true"
+        >
+          {cardData.map((card, i) => (
+            <li key={i} className="relative cursor-pointer">
+              <div className="w-44 h-32 rounded-xl overflow-hidden">
+                <img
+                  src={card.image}
+                  alt="card image"
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <p className="mt-4 text-gray-800 text-sm"> {card.name}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }

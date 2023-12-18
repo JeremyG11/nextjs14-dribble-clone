@@ -6,6 +6,7 @@ import CTAHome1 from "@/components/Home/CTAHome1";
 import ShotCard from "@/components/Home/ShotCard";
 import { Button } from "@/components/Reusable/Button";
 import { InfiniteScrollCards } from "@/components/Home/InfiniteScrollCards";
+import Footer from "@/components/Footer/Footer";
 
 const font = Source_Serif_4({
   subsets: ["greek"],
@@ -58,13 +59,14 @@ export default function Home() {
             ))}
           </div>
           <div className="py-8 flex items-center justify-center">
-            <Button styles="py-4 px-8 border border-gray-900 font-medium text-gray-900 font-medium text-sm rounded-full border border-gray-200 hover:opacity-60">
+            <Button className="py-4 px-8 border border-gray-900 font-medium text-gray-900 font-medium text-sm rounded-full border border-gray-200 hover:opacity-60">
               Browse more inspirations
             </Button>
           </div>
         </div>
         <CTAHome1 />
       </section>
+      <Footer />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { SlDiamond } from "react-icons/sl";
 import { TbWorldShare } from "react-icons/tb";
-import { AiOutlineDollarCircle } from "react-icons/ai";
+import { PiCurrencyCircleDollarLight } from "react-icons/pi";
 
 import Badge from "../Reusable/Badge";
 
@@ -12,13 +12,13 @@ const FeatureSection = () => {
         Why brands choose Dribbble to hire design talent
       </h1>
       <div className="container px-5 pt-10  mx-auto flex flex-row-reverse flex-nowrap gap-x-20">
-        <div className="w-1/2 rounded-xl overflow-hidden ">
+        <div className="w-1/2 h-96 rounded-xl overflow-hidden">
           <img
-            src="https://framerusercontent.com/images/vZpPLA2vZuMSa2oDD3BTIgWq5tU.jpg"
+            src="https://images.pexels.com/photos/5676679/pexels-photo-5676679.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
             alt=""
             sizes="630px"
             loading="lazy"
-            className="block xl:w-3/4 xl:h-96 rounded-2xl"
+            className="block w-3/4 h-full object-cover rounded-2xl"
           />
         </div>
         <div className="flex flex-col flex-wrap lg:py-6 -mb-10 lg:w-1/2 lg:pl-12 lg:text-left text-center">
@@ -32,7 +32,7 @@ const FeatureSection = () => {
             },
             {
               name: "$0 PLACEMENT FEES",
-              icon: <AiOutlineDollarCircle className="text-3xl" />,
+              icon: <PiCurrencyCircleDollarLight className="text-3xl" />,
               bg: "bg-blue-100",
               description:
                 "We make the hiring process as seamless and cost-effective as possible, so you can focus on building your business.",
@@ -52,7 +52,7 @@ const FeatureSection = () => {
               <div className="flex-grow">
                 <Badge
                   text={item?.name ?? ""}
-                  className={`${item?.bg} rounded-none mx-0 p-0.5 text-black uppercase`}
+                  className={`${item?.bg} rounded-none mx-0 px-0.5 p-0.5 text-black uppercase`}
                 />
               </div>
               <p className="text-base font-normal leading-8">

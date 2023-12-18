@@ -59,13 +59,15 @@ export default function ShotUploadForm() {
     <div className="flex w-full min-w-full  max-h-screen">
       <div className="flex-grow overflow-y-auto">
         <div className="px-6 w-full z-10 flex justify-between sticky top-6">
-          <Button styles="border py-2 px-5 text-sm font-medium">Cancel</Button>
+          <Button className="border py-2 px-5 text-sm font-medium">
+            Cancel
+          </Button>
 
           <div className="inline-flex">
-            <Button styles="py-2 px-5 text-sm font-medium mx-4 bg-zinc-100">
+            <Button className="py-2 px-5 text-sm font-medium mx-4 bg-zinc-100">
               Save as draft
             </Button>
-            <Button styles="px-3 py-1 md:py-2 md:px-5 text-white text-sm mr-4 font-medium bg-black">
+            <Button className="px-3 py-1 md:py-2 md:px-5 text-white text-sm mr-4 font-medium bg-black">
               Continue
             </Button>
           </div>

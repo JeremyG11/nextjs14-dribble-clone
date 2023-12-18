@@ -53,7 +53,7 @@ export default function HiringSuitePricingCard() {
           </li>
         ))}
       </ul>
-      <Button styles="mt-8 w-full block font-normal rounded-full bg-primary px-12 py-3 text-center text-sm text-white hover:ring-1 hover:ring-pink-700 focus:outline-none focus:ring active:text-pink-500">
+      <Button className="mt-8 w-full block font-normal rounded-full bg-primary px-12 py-3 text-center text-sm text-white hover:ring-1 hover:ring-pink-700 focus:outline-none focus:ring active:text-pink-500">
         Find talent
       </Button>
       <p className="mt-4 font-light ">Cancel anytime. No strings attached</p>

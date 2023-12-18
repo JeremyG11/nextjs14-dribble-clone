@@ -2,10 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { IBM_Plex_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import Footer from "@/components/Footer/Footer";
 
 const font = IBM_Plex_Sans({
-  subsets: ["latin"],
+  subsets: ["cyrillic"],
   weight: ["100", "200", "300", "400", "500", "600", "700"],
 });
 
@@ -22,9 +21,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body className={font.className}>
-          {children} <Footer />
-        </body>
+        <body className={font.className}>{children}</body>
       </html>
     </ClerkProvider>
   );

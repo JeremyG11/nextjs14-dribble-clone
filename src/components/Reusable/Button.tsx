@@ -1,16 +1,16 @@
 import React from "react";
 
 interface ButtonProps {
-  styles: string;
+  className: string;
   children: React.ReactNode;
   onClick?: () => void;
 }
-export function Button({ styles, onClick, children }: ButtonProps) {
+export function Button({ className, onClick, children }: ButtonProps) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`cursor-pointer rounded-full ${styles}`}
+      className={`cursor-pointer rounded-full ${className}`}
     >
       {children}
     </button>

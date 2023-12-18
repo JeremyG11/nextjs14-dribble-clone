@@ -1,11 +1,14 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import dribbleLogo from "../../../public/images/Dribbble_logo.svg";
 
 export default function Logo() {
+  const router = useRouter();
   return (
-    <Link href="#" className="flex ">
+    <div onClick={() => router.push("/")} className="flex cursor-pointer">
       <Image
         src={dribbleLogo}
         alt="Logo"
@@ -13,6 +16,6 @@ export default function Logo() {
         height={50}
         className="h-6 xl:h-7"
       />
-    </Link>
+    </div>
   );
 }

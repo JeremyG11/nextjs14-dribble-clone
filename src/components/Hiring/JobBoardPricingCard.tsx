@@ -39,7 +39,7 @@ export default function JobBoardPricingCard() {
           </li>
         ))}
       </ul>
-      <Button styles="mt-8 w-full block  border font-normal rounded-full px-12 py-3 text-center text-sm hover:text-gray-500">
+      <Button className="mt-8 w-full block  border font-normal rounded-full px-12 py-3 text-center text-sm hover:text-gray-500">
         Post a job
       </Button>
       <p className="mt-4 font-light ">Cancel anytime. No strings attached</p>

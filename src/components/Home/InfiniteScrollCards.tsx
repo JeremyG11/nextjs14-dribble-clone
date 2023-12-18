@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
+import ButtonBage from "../Reusable/ButtonBage";
 
 export const InfiniteScrollCards = () => {
   const cardRef = useRef<HTMLUListElement | null>(null);
@@ -78,12 +79,10 @@ export const InfiniteScrollCards = () => {
 
               <div className="flex items-center">
                 {card.skills.map((skill) => (
-                  <button
-                    key={skill}
-                    className=" mr-2 p-1 px-2 rounded-full text-xs border text-white duration-150"
-                  >
-                    {skill}
-                  </button>
+                  <ButtonBage
+                    text={skill}
+                    className="text-white  mr-2 p-0.5 text-sm px-2"
+                  />
                 ))}
               </div>
             </div>

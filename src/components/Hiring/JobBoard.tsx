@@ -5,7 +5,7 @@ import Badge from "../Reusable/Badge";
 export default function JobBoard() {
   return (
     <>
-      <section className="overflow-hidden p-8 xl:py-20 sm:grid sm:grid-cols-2 flex gap-x-10">
+      <section className="overflow-hidden p-8 xl:py-20 xl:px-14 sm:grid sm:grid-cols-2 flex gap-x-10">
         <div className="px-8 py-4 flex-order-2 ">
           <div className="mx-auto max-w-xl ltr:sm:text-left rtl:sm:text-right space-y-8">
             <Badge
@@ -24,7 +24,7 @@ export default function JobBoard() {
               time hiring amazing talent.
             </p>
             <div className="mt-4 md:mt-8">
-              <Button styles="mt-8 block font-normal rounded-full bg-primary px-12 py-3 text-center text-sm text-white hover:ring-1 hover:ring-pink-700 focus:outline-none focus:ring active:text-pink-500">
+              <Button className="mt-8 block font-normal rounded-full bg-primary px-12 py-3 text-center text-sm text-white hover:ring-1 hover:ring-pink-700 focus:outline-none focus:ring active:text-pink-500">
                 Vist the job board
               </Button>
             </div>
@@ -43,7 +43,7 @@ export default function JobBoard() {
         </div>
       </section>
 
-      <section className="overflow-hidden p-8 xl:py-10 sm:grid sm:grid-cols-2 flex flex-row-reverse gap-x-10">
+      <section className="overflow-hidden p-8 xl:py-10 xl:px-14 sm:grid sm:grid-cols-2 flex flex-row-reverse gap-x-10">
         <div className="flex max-h-96 flex-col items-center justify-end gap-4 p-8 relative bg-gradient-to-b from-[#ecfbf9] to-[#e5fcde] rounded-2xl">
           <video
             src="https://framerusercontent.com/assets/anyiHSPP2um93testsvKwARCwiI.mp4"
@@ -72,7 +72,7 @@ export default function JobBoard() {
               largest professional creative community with just a few clicks.
             </p>
             <div className="mt-4 md:mt-8">
-              <Button styles="mt-8 block font-normal rounded-full bg-primary px-12 py-3 text-center text-sm text-white hover:ring-1 hover:ring-pink-700 focus:outline-none focus:ring active:text-pink-500">
+              <Button className="mt-8 block font-normal rounded-full bg-primary px-12 py-3 text-center text-sm text-white hover:ring-1 hover:ring-pink-700 focus:outline-none focus:ring active:text-pink-500">
                 Start your search
               </Button>
             </div>
