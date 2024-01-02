@@ -1,0 +1,8 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_DB: dribble-db
+      POSTGRES_HOST_AUTH_METHOD: trust

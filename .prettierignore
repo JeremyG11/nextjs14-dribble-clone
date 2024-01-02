@@ -1,0 +1,5 @@
+# next
+.next/
+
+# Ignore special files
+package-lock.json
