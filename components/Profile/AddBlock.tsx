@@ -3,32 +3,17 @@
 import React from "react";
 import { FaPlus } from "react-icons/fa6";
 
+import { useBlock } from "@/hooks/toggle";
 import TooltipButton from "../Reusable/Tooltip";
-import { BlockType, useBlock } from "../../hooks/toggle";
 
 export const AddBlock = () => {
-  const { setDrawerOpen, addBoardBlock } = useBlock();
+  const { setDrawerOpen, onOpenBlock } = useBlock();
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setDrawerOpen(true);
-  };
-  const handleAddImageBlock = () => {
-    const imageBlock = {
-      id: 0, // You can set this to an appropriate value
-      type: "image" as const, // Type assertion to BlockType
-      items: [], // Add any initial data as needed
-    };
-    addBoardBlock(imageBlock);
+    onOpenBlock("index");
   };
 
-  const handleAddTextBlock = () => {
-    const textBlock = {
-      id: 0,
-      type: "text" as const,
-      items: [], // Add any initial data as needed
-    };
-    addBoardBlock(textBlock);
-  };
   return (
     <div className="   flex items-center justify-center py-10 w-full">
       <span className="h-[2px] flex-1 bg-gray-200"></span>

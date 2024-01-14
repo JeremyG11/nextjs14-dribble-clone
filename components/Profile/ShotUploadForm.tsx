@@ -1,17 +1,28 @@
 "use client";
-import React, { RefObject, useRef, useState } from "react";
+import React, { RefObject, useState } from "react";
 
 import { AddBlock } from "./AddBlock";
 import SideDrawer from "./SideDrawer";
 import { Button } from "../Reusable/Button";
 import TooltipButton from "../Reusable/Tooltip";
-import AltText from "../Reusable/AltText";
 import FileUploader from "./FileUploader";
-import useBlock from "@/hooks/toggle";
+import { useBlock } from "@/hooks/toggle";
 import BlockDisplayCard from "./BlockDisplayCard";
 
 export default function ShotUploadForm() {
-  const { blocks, isDrawerOpen } = useBlock();
+  const { isDrawerOpen, setDrawerOpen, boardData } = useBlock();
+
+  const handleDropZone = (files: File[]) => {
+    const selectedFile = files[0];
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      // setFiles([selectedFile]);
+    };
+
+    reader.readAsDataURL(new Blob([selectedFile]));
+  };
+
   return (
     <div className="flex w-full min-w-full max-h-screen">
       <div className="relative flex-grow overflow-y-auto hide-scroll-bar">
@@ -60,19 +71,15 @@ export default function ShotUploadForm() {
                 false ? "mt-3" : "mt-10"
               }`}
             >
-              {/* <FileUploader onFilesChange={handleDropZone} /> */}
-              {blocks.map((block) => (
+              {Object.keys(boardData).length === 0 ? (
+                <FileUploader onFilesChange={handleDropZone} />
+              ) : (
                 <BlockDisplayCard />
-              ))}
+              )}
             </div>
 
             <>
-              <div className="w-8/12 mx-auto mt-8">
-                <AltText
-                  placeholder="Write what went in too this design or add any details you like to mention"
-                  className="max-w-2xl block w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border-2 border-white hover:border-gray-200 bg-white px-5 py-4 text-gray-700 focus:border-pink-300 focus:outline-none focus:ring focus:ring-pink-200 focus:ring-opacity-40"
-                />{" "}
-              </div>
+              <div className="w-8/12 mx-auto mt-8"></div>
               <AddBlock />
             </>
           </form>

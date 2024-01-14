@@ -22,10 +22,13 @@ const BlockButton = ({
     entry.hasOwnProperty(type)
   ) as IconEntry;
 
+  const handleOnClick = () => {
+    onOpenBlock(type);
+  };
   return (
     <div className="flex">
       <div className="space-y-4 w-64 pt-2 ">
-        <button onClick={() => onOpenBlock(type)} className={`${className}`}>
+        <button onClick={handleOnClick} className={`${className}`}>
           <p className="flex items-center w-full">
             {iconEntry[type]}
             <span className="mx-2.5 font-normal capitalize">{label}</span>

@@ -1,15 +1,22 @@
 "use client";
+import { useBlock } from "@/hooks/toggle";
 import AdjustLayout from "../../Reusable/AdjustLayout";
 import AltText from "../../Reusable/AltText";
 import MediaUpload from "../../Reusable/MediaUpload";
 import React from "react";
-import useBlock from "../../../hooks/toggle";
 
 export const ImageBlock = () => {
-  const { addBoardBlock } = useBlock();
+  const { boardData } = useBlock();
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
   };
+  let mediaSrcUrl = "";
+  if (Array.isArray(boardData.image)) {
+    mediaSrcUrl = boardData.image[0];
+  } else if (boardData.image && "files" in boardData.image) {
+    mediaSrcUrl = boardData.image.files[0];
+  }
+
   return (
     <div>
       <div className="w-full rounded-lg flex items-center cursor-pointer">
@@ -35,7 +42,11 @@ export const ImageBlock = () => {
         </p>
       </div>
       <div>
-        <MediaUpload />
+        {false ? (
+          <img src={"URL.createObjectURL()"} />
+        ) : (
+          <MediaUpload mediaType="image" mediaSrcUrl={mediaSrcUrl} />
+        )}
         <AltText
           label="Alt Text"
           placeholder="Enter Text..."
