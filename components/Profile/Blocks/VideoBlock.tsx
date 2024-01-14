@@ -1,18 +1,18 @@
 "use client";
-import AdjustLayout from "../../Reusable/AdjustLayout";
+import { useBlock } from "@/hooks/toggle";
 import AltText from "../../Reusable/AltText";
 import MediaUpload from "../../Reusable/MediaUpload";
-import React, {
-  Dispatch,
-  ForwardedRef,
-  SetStateAction,
-  forwardRef,
-} from "react";
+import AdjustLayout from "../../Reusable/AdjustLayout";
 
 export const VideoBlock = () => {
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.preventDefault();
-  };
+  const { boardData } = useBlock();
+
+  let mediaSrcUrl = "";
+  if (Array.isArray(boardData?.video)) {
+    mediaSrcUrl = boardData?.video[0];
+  } else if (boardData?.video && "files" in boardData?.video) {
+    mediaSrcUrl = boardData?.video?.files[0]?.url;
+  }
 
   return (
     <>
@@ -38,7 +38,11 @@ export const VideoBlock = () => {
           <span className="mx-2.5 font-normal">Video</span>
         </div>
         <div>
-          <MediaUpload />
+          {false ? (
+            <img src={"URL.createObjectURL()"} />
+          ) : (
+            <MediaUpload mediaType="video" mediaSrcUrl={mediaSrcUrl} />
+          )}
           <AltText
             label="Alt Text"
             placeholder="Enter Text..."

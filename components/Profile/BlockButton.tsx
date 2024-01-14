@@ -1,7 +1,7 @@
 import React from "react";
+import { IconEntry, IconMap } from "./IconMap";
 import { BlockType, useBlock } from "../../hooks/toggle";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { IconEntry, IconMap } from "./IconMap";
 
 interface BlockButtonProps {
   type: BlockType;

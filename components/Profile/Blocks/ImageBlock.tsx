@@ -7,14 +7,12 @@ import React from "react";
 
 export const ImageBlock = () => {
   const { boardData } = useBlock();
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.preventDefault();
-  };
+
   let mediaSrcUrl = "";
   if (Array.isArray(boardData.image)) {
     mediaSrcUrl = boardData.image[0];
   } else if (boardData.image && "files" in boardData.image) {
-    mediaSrcUrl = boardData.image.files[0];
+    mediaSrcUrl = boardData.image.files[0]?.url;
   }
 
   return (
@@ -42,11 +40,7 @@ export const ImageBlock = () => {
         </p>
       </div>
       <div>
-        {false ? (
-          <img src={"URL.createObjectURL()"} />
-        ) : (
-          <MediaUpload mediaType="image" mediaSrcUrl={mediaSrcUrl} />
-        )}
+        <MediaUpload mediaType="image" mediaSrcUrl={mediaSrcUrl} />
         <AltText
           label="Alt Text"
           placeholder="Enter Text..."

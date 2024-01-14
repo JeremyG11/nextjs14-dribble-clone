@@ -1,44 +1,50 @@
-// FileUploader.tsx
+"use client";
 import Image from "next/image";
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent } from "react";
+import { FileData, useBlock } from "@/hooks/toggle";
 import imageIcon from "@/public/images/shotUploadIcon.png";
-import { useBlock } from "@/hooks/toggle";
 
 interface FileUploaderProps {
   onFilesChange: (files: File[]) => void;
 }
 
 const FileUploader = ({ onFilesChange }: FileUploaderProps) => {
-  const [files, setFiles] = useState<File[]>([]);
   const { onOpenBlock, updateFiles, setDrawerOpen } = useBlock();
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const selectedFiles = Array.from(e.target.files);
-      setFiles(selectedFiles);
-      onFilesChange(selectedFiles);
+  const createFileData = (file: File): FileData => {
+    const fileUrl = URL.createObjectURL(file);
+    const fileType = file.type.split("/")[0];
+    return { url: fileUrl, type: fileType };
+  };
 
-      // Create object URLs from the selected files
-      const fileUrls = selectedFiles.map((file) => URL.createObjectURL(file));
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const selectedFiles = Array.from(e.target.files);
+
+      const selectedFileData = selectedFiles.map(createFileData);
+
+      onFilesChange(selectedFiles);
 
       const fileType = selectedFiles[0].type.split("/")[0];
       if (fileType === "image") {
         onOpenBlock("image");
-        updateFiles("image", fileUrls);
+        updateFiles("image", selectedFileData);
       } else if (fileType === "video") {
         onOpenBlock("video");
-        updateFiles("video", fileUrls);
+        updateFiles("video", selectedFileData);
+      } else {
+        // Handle edge case where file type is neither "image" nor "video"
+        console.error(`Unsupported file type: ${fileType}`);
       }
 
       setDrawerOpen(true);
     }
   };
-
   return (
     <div className="relative w-full h-full">
       <label
         htmlFor="dropzone-file"
-        className="relative p-3 flex flex-col justify-center w-full max-w-5xl mx-auto h-full border-2 rounded-lg border-gray-300 cursor-pointer"
+        className="relative p-3 flex flex-col justify-center w-full h-screen max-w-5xl mx-auto border-2 rounded-lg border-gray-300 cursor-pointer"
       >
         <div className="z-30 flex flex-col items-center justify-center pt-5 pb-6 space-y-8">
           <div className="flex flex-col items-center justify-center space-y-3">
@@ -67,7 +73,6 @@ const FileUploader = ({ onFilesChange }: FileUploaderProps) => {
           className="hidden"
           onChange={handleFileChange}
           multiple
-          disabled={files.length > 0}
         />
       </label>
     </div>

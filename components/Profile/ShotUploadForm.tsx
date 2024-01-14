@@ -80,7 +80,7 @@ export default function ShotUploadForm() {
 
             <>
               <div className="w-8/12 mx-auto mt-8"></div>
-              <AddBlock />
+              {Object.keys(boardData).length !== 0 && <AddBlock />}
             </>
           </form>
         </div>

@@ -104,13 +104,13 @@ export default function SideDrawer() {
     }
   }, [blockType]);
   return (
-    <div className={`w-full h-screen ${isDrawerOpen ? "block" : "hidden"} `}>
-      <div className="flex w-full h-screen shadow-2xl ">
-        <div className="w-80 p-8">
+    <div className={`w-full h-screen ${isDrawerOpen ? "block" : "hidden"}`}>
+      <div className="flex w-full h-screen shadow-2xl">
+        <div className="w-80 p-8 overflow-y-auto h-full">
           <button onClick={toggleDrawer} className="text-sm">
             Close
           </button>
-          <div className="pt-6 w-full">{renderSelectedBlock()}</div>
+          <div className="pt-6 w-full mb-14">{renderSelectedBlock()}</div>
         </div>
         {blockType === "text" ? (
           <div className="h-h-full w-80 bg-gray-200 p-8">

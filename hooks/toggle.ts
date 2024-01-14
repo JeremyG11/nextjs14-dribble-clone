@@ -8,12 +8,15 @@ export type BlockType =
   | "pastwork"
   | "gallery";
 
-type BoardDataType = {
-  [key in BlockType]?:
-    | {
-        files: string[];
-      }
-    | string[];
+export type FileData = {
+  url: string;
+  type: string;
+};
+
+export type BoardDataType = {
+  [key in BlockType]?: {
+    files: FileData[];
+  };
 };
 
 export interface Block {
@@ -22,7 +25,8 @@ export interface Block {
   boardData: BoardDataType;
   onOpenBlock: (type: BlockType) => void;
   setDrawerOpen: (isOpen: boolean) => void;
-  updateFiles: (type: BlockType, files: string[]) => void;
+  updateFiles: (type: BlockType, files: FileData[]) => void;
+  removeFile: (type: BlockType, index: number) => void;
 }
 
 export const useBlock = create<Block>((set) => ({
@@ -40,4 +44,21 @@ export const useBlock = create<Block>((set) => ({
         },
       },
     })),
+  removeFile: (type, index) =>
+    set((state) => {
+      const files = state.boardData[type]?.files || [];
+      if (files.length > 0) {
+        const newFiles = [...files];
+        newFiles.splice(index, 1);
+        return {
+          boardData: {
+            ...state.boardData,
+            [type]: {
+              files: newFiles,
+            },
+          },
+        };
+      }
+      return state;
+    }),
 }));

@@ -1,15 +1,27 @@
 import React from "react";
+import { useLayoutStore } from "@/hooks/layout";
 
 export default function AdjustLayout() {
+  const { layout, setLayout1, setLayout2 } = useLayoutStore();
+  const handleLayout1Click = () => {
+    setLayout1();
+  };
+
+  const handleLayout2Click = () => {
+    setLayout2();
+  };
   return (
-    <div>
+    <div className="">
       <label htmlFor="file" className="block font-normal mt-3 py-1.5 pt-4">
         Layout
       </label>
-      <span className="flex w-full overflow-hidden rounded-md border bg-white shadow-sm">
+      <span className="flex justify-center w-full overflow-hidden rounded-md bg-white">
         <button
           type="button"
-          className="inline-flex w-full items-center px-4 p-2.5 text-sm justify-center font-medium text-gray-900 bg-white-2 m-0.5 border-gray-200 rounded-s-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+          onClick={handleLayout1Click}
+          className={`inline-flex w-full border items-center px-4 py-2.5 text-sm justify-center font-medium text-gray-900 bg-white-2 m-0.5 border-gray-200 rounded-s-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 ${
+            layout === "layout1" ? "border-2 border-blue-700" : ""
+          }`}
         >
           <svg
             width="13"
@@ -30,7 +42,12 @@ export default function AdjustLayout() {
           </svg>
         </button>
 
-        <button className="inline-flex w-full items-center justify-center px-4 p-2.5 text-sm font-medium text-gray-900 bg-white-2 m-0.5 border-gray-200 rounded-e-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 focus:outline-none">
+        <button
+          onClick={handleLayout2Click}
+          className={`inline-flex w-full border items-center justify-center px-4 p-2.5 text-sm font-medium text-gray-900 bg-white-2 m-0.5 border-gray-200 rounded-e-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none ${
+            layout === "layout2" ? "border-2 border-blue-700" : ""
+          }`}
+        >
           <svg
             width="13"
             height="13"
