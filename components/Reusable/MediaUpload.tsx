@@ -46,10 +46,15 @@ export default function MediaUpload({
               alt=""
               src={mediaSrcUrl}
               fill
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full rounded-lg"
             />
           ) : (
-            <video className="object-cover w-full h-full" autoPlay loop muted>
+            <video
+              className="object-cover w-full h-full rounded-lg"
+              autoPlay
+              loop
+              muted
+            >
               <source src={mediaSrcUrl} type="video/mp4" />
               Your browser does not support the video tag.
             </video>

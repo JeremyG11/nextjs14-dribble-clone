@@ -20,12 +20,10 @@ export default function BlockDisplayCard() {
     removeFile(blockKey, index);
   };
 
-  useEffect(() => {
-    console.log("Current layout:", layout);
-  }, [layout]);
+  useEffect(() => {}, [layout]);
 
   return (
-    <div className="w-full h-auto space-y-6">
+    <div className="w-full h-auto space-y-24">
       {Object.keys(boardData).map((blockKey) => {
         const block = boardData[blockKey as BlockType];
         if (typeof block === "object" && block !== null && "files" in block) {
@@ -33,13 +31,13 @@ export default function BlockDisplayCard() {
             block.files.map((file, index) => (
               <div
                 onClick={() => handleFileClick(blockKey as BlockType)}
-                className={`relative w-full h-screen mx-auto border-2 rounded-lg p-4 border-pink-500 transition-all duration-200 ease-in-out ${
+                className={`relative w-full h-screen mx-auto border-2 rounded-xl p-4 border-pink-500 transition-all duration-200 ease-in-out ${
                   layout === "layout1" ? "max-w-3xl" : "max-w-7xl"
                 }`}
               >
                 {file.type === "video" ? (
                   <video
-                    className="object-cover w-full h-full"
+                    className="object-cover w-full h-full rounded-xl"
                     autoPlay
                     loop
                     muted
@@ -53,12 +51,12 @@ export default function BlockDisplayCard() {
                     src={file.url}
                     alt={blockKey}
                     fill
-                    className="w-full h-full object-cover rounded-lg"
+                    className="w-full h-full object-cover rounded-xl"
                   />
                 )}
                 <button
                   onClick={() => handleRemoveFile(blockKey as BlockType, index)}
-                  className="absolute z-40 top-0 right-0 transform translate-x-1/2 -translate-y-1/2 text-black transition-all hover:text-red-500 p-3 rounded-lg shadow-2xl bg-gray-50"
+                  className="absolute z-40 top-0 right-0 transform translate-x-1/2 -translate-y-1/2 text-black transition-all hover:text-red-500 p-3 rounded-xl shadow-2xl bg-gray-50"
                 >
                   <BsFillTrash3Fill />
                 </button>
@@ -67,7 +65,7 @@ export default function BlockDisplayCard() {
           ) : (
             <div
               onClick={() => handleFileClick(blockKey as BlockType)}
-              className={`relative w-full h-screen mx-auto overflow-hidden border-2 rounded-lg p-4 border-pink-500 transition-all duration-200 ease-in-out ${
+              className={`relative w-full h-screen mx-auto overflow-hidden border-2 rounded-xl p-4 border-pink-500 transition-all duration-200 ease-in-out ${
                 layout === "layout1" ? "max-w-3xl" : "max-w-7xl"
               }`}
             >

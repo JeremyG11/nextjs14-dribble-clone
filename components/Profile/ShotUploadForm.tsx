@@ -1,16 +1,16 @@
 "use client";
-import React, { RefObject, useState } from "react";
+import React from "react";
 
 import { AddBlock } from "./AddBlock";
 import SideDrawer from "./SideDrawer";
 import { Button } from "../Reusable/Button";
-import TooltipButton from "../Reusable/Tooltip";
 import FileUploader from "./FileUploader";
 import { useBlock } from "@/hooks/toggle";
 import BlockDisplayCard from "./BlockDisplayCard";
 
 export default function ShotUploadForm() {
-  const { isDrawerOpen, setDrawerOpen, boardData } = useBlock();
+  const { isDrawerOpen, boardData } = useBlock();
+  const isFileSelected = Object.keys(boardData).length !== 0;
 
   const handleDropZone = (files: File[]) => {
     const selectedFile = files[0];
@@ -28,7 +28,7 @@ export default function ShotUploadForm() {
       <div className="relative flex-grow overflow-y-auto hide-scroll-bar">
         <div
           className={`px-6 w-full z-10 flex justify-between  top-6  ${
-            false ? "absolute" : "sticky"
+            isFileSelected ? "absolute" : "sticky"
           }`}
         >
           <Button className="border py-2 px-5 text-sm font-medium">
@@ -47,19 +47,16 @@ export default function ShotUploadForm() {
         <div
           className={`${
             isDrawerOpen ? "mx-0" : "mx-8 xl:mx-40"
-          } mt-12 xl:h-full `}
+          } pt-14 xl:h-full `}
         >
-          <form onSubmit={() => {}} className="w-full xl:h-auto ">
-            {false ? (
-              <span className="flex items-center justify-center text-gray-400 text-2xl font-semibold sm:text-4xl">
-                <TooltipButton description="Hello bg-gray-800" className="">
-                  <input
-                    type="text"
-                    placeholder=" Give me a name"
-                    value=""
-                    className="outline-none"
-                  />
-                </TooltipButton>
+          <form onSubmit={() => {}} className="mt-14 w-full xl:h-auto ">
+            {isFileSelected ? (
+              <span className="py-5 flex items-center text-gray-400 text-2xl font-semibold sm:text-4xl xl:max-w-3xl">
+                <input
+                  type="text"
+                  placeholder=" Give me a name"
+                  className="mx-auto outline-none"
+                />
               </span>
             ) : (
               <h1 className="text-center text-gray-800 text-2xl font-semibold sm:text-4xl">
@@ -68,10 +65,10 @@ export default function ShotUploadForm() {
             )}
             <div
               className={`flex items-center justify-center w-full xl:h-full ${
-                false ? "mt-3" : "mt-10"
+                isFileSelected ? "mt-3" : "mt-10"
               }`}
             >
-              {Object.keys(boardData).length === 0 ? (
+              {!isFileSelected ? (
                 <FileUploader onFilesChange={handleDropZone} />
               ) : (
                 <BlockDisplayCard />
@@ -80,7 +77,7 @@ export default function ShotUploadForm() {
 
             <>
               <div className="w-8/12 mx-auto mt-8"></div>
-              {Object.keys(boardData).length !== 0 && <AddBlock />}
+              {isFileSelected && <AddBlock />}
             </>
           </form>
         </div>
