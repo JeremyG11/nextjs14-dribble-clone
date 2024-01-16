@@ -1,9 +1,5 @@
-import React, {
-  Dispatch,
-  ForwardedRef,
-  SetStateAction,
-  forwardRef,
-} from "react";
+import { useBlock } from "@/hooks/toggle";
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 interface GalleryBlockProps {
@@ -13,9 +9,27 @@ interface GalleryBlockProps {
 }
 
 export const GalleryBlock = () => {
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.preventDefault();
+  const { boardData, onOpenBlock, setDrawerOpen, updateFiles } = useBlock();
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const selectedFile = e.target.files[0];
+      setFile(selectedFile);
+
+      const fileUrl = URL.createObjectURL(selectedFile);
+      const fileData = { url: fileUrl, type: "mediaType" };
+
+      onOpenBlock("gallery");
+      if (boardData?.gallery) {
+        updateFiles("gallery", [...boardData.gallery.files, fileData]); // append new file to the existing ones
+      }
+    }
+
+    console.log(boardData);
+    setDrawerOpen(true);
   };
+
   return (
     <div>
       <div className="w-full rounded-lg flex items-center cursor-pointer">
@@ -65,7 +79,12 @@ export const GalleryBlock = () => {
           <span className="border-b-2 text-sm mt-4 mx-1 border-pink-500">
             Add slides
           </span>
-          <input type="file" id="slideFile" className="sr-only" />
+          <input
+            type="file"
+            id="slideFile"
+            className="sr-only"
+            onChange={handleFileChange}
+          />
         </label>
       </div>
     </div>

@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import { useEffect } from "react";
 import { BsFillTrash3Fill } from "react-icons/bs";
@@ -6,6 +5,7 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 import BlockUploader from "./BlockUploader";
 import { useLayoutStore } from "@/hooks/layout";
 import { BlockType, useBlock } from "@/hooks/toggle";
+import GalleryUploader from "./GalleryUploader";
 
 export default function BlockDisplayCard() {
   const { layout } = useLayoutStore();
@@ -21,19 +21,28 @@ export default function BlockDisplayCard() {
   };
 
   useEffect(() => {}, [layout]);
+  const galleryBlock = boardData["gallery"];
 
   return (
     <div className="w-full h-auto space-y-24">
-      {Object.keys(boardData).map((blockKey) => {
+      {Object.keys(boardData).map((blockKey, index: number) => {
         const block = boardData[blockKey as BlockType];
         if (typeof block === "object" && block !== null && "files" in block) {
-          return block.files.length > 0 ? (
-            block.files.map((file, index) => (
+          if (blockKey === "gallery") {
+            return (
+              <GalleryUploader
+                files={block.files}
+                blockType={blockKey as BlockType}
+              />
+            );
+          } else if (block.files.length > 0) {
+            return block.files.map((file, index) => (
               <div
                 onClick={() => handleFileClick(blockKey as BlockType)}
                 className={`relative w-full h-screen mx-auto border-2 rounded-xl p-4 border-pink-500 transition-all duration-200 ease-in-out ${
                   layout === "layout1" ? "max-w-3xl" : "max-w-7xl"
                 }`}
+                key={`${blockKey}-${index}`}
               >
                 {file.type === "video" ? (
                   <video
@@ -61,17 +70,20 @@ export default function BlockDisplayCard() {
                   <BsFillTrash3Fill />
                 </button>
               </div>
-            ))
-          ) : (
-            <div
-              onClick={() => handleFileClick(blockKey as BlockType)}
-              className={`relative w-full h-screen mx-auto overflow-hidden border-2 rounded-xl p-4 border-pink-500 transition-all duration-200 ease-in-out ${
-                layout === "layout1" ? "max-w-3xl" : "max-w-7xl"
-              }`}
-            >
-              <BlockUploader blockType={blockKey as BlockType} />
-            </div>
-          );
+            ));
+          } else {
+            return (
+              <div
+                onClick={() => handleFileClick(blockKey as BlockType)}
+                className={`relative w-full h-screen mx-auto overflow-hidden border-2 rounded-xl p-4 border-pink-500 transition-all duration-200 ease-in-out ${
+                  layout === "layout1" ? "max-w-3xl" : "max-w-7xl"
+                }`}
+                key={`${blockKey}-${index}`}
+              >
+                <BlockUploader blockType={blockKey as BlockType} />
+              </div>
+            );
+          }
         }
       })}
     </div>

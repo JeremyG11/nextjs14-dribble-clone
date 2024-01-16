@@ -1,9 +1,9 @@
 "use client";
+import React from "react";
 import { useBlock } from "@/hooks/toggle";
-import AdjustLayout from "../../Reusable/AdjustLayout";
 import AltText from "../../Reusable/AltText";
 import MediaUpload from "../../Reusable/MediaUpload";
-import React from "react";
+import AdjustLayout from "../../Reusable/AdjustLayout";
 
 export const ImageBlock = () => {
   const { boardData } = useBlock();

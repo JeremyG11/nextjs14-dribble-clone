@@ -43,7 +43,7 @@ export default function ShotUploadForm() {
               Continue
             </Button>
           </div>
-        </div>{" "}
+        </div>
         <div
           className={`${
             isDrawerOpen ? "mx-0" : "mx-8 xl:mx-40"
