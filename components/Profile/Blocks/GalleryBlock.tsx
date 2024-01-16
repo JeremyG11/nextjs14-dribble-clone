@@ -1,35 +1,11 @@
-import { useBlock } from "@/hooks/toggle";
-import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+"use client";
+import { FaPlus } from "react-icons/fa6";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
-interface GalleryBlockProps {
-  toggleGalleryBlock: boolean;
-  setToggleGalleryBlock: Dispatch<SetStateAction<boolean>>;
-  onSelect: () => void;
-}
+import { useBlock } from "@/hooks/toggle";
 
 export const GalleryBlock = () => {
-  const { boardData, onOpenBlock, setDrawerOpen, updateFiles } = useBlock();
-  const [file, setFile] = useState<File | null>(null);
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const selectedFile = e.target.files[0];
-      setFile(selectedFile);
-
-      const fileUrl = URL.createObjectURL(selectedFile);
-      const fileData = { url: fileUrl, type: "mediaType" };
-
-      onOpenBlock("gallery");
-      if (boardData?.gallery) {
-        updateFiles("gallery", [...boardData.gallery.files, fileData]); // append new file to the existing ones
-      }
-    }
-
-    console.log(boardData);
-    setDrawerOpen(true);
-  };
-
   return (
     <div>
       <div className="w-full rounded-lg flex items-center cursor-pointer">
@@ -75,7 +51,7 @@ export const GalleryBlock = () => {
           </p>
           <MdOutlineKeyboardArrowRight className="text-xl" />
         </button>
-        <label htmlFor="slideFile" className="bg-red-500 mt-4">
+        {/* <label htmlFor="slideFile" className="bg-red-500 mt-4">
           <span className="border-b-2 text-sm mt-4 mx-1 border-pink-500">
             Add slides
           </span>
@@ -85,8 +61,51 @@ export const GalleryBlock = () => {
             className="sr-only"
             onChange={handleFileChange}
           />
-        </label>
+        </label> */}
+        <MiniGalleryUploader className="cursor-pointer p-1 flex justify-center items-center relative border-2 border-dashed h-16 w-20 rounded-lg  hover:text-red-400 hover:border-red-400" />
       </div>
     </div>
+  );
+};
+
+interface MiniGalleryUploaderProps {
+  className: string;
+}
+
+export const MiniGalleryUploader = ({
+  className,
+}: MiniGalleryUploaderProps) => {
+  const { boardData, onOpenBlock, setDrawerOpen, updateFiles } = useBlock();
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const selectedFile = e.target.files[0];
+      setFile(selectedFile);
+
+      const fileUrl = URL.createObjectURL(selectedFile);
+      const fileData = { url: fileUrl, type: "mediaType" };
+
+      onOpenBlock("gallery");
+      if (boardData?.gallery) {
+        updateFiles("gallery", [...boardData.gallery.files, fileData]);
+      } else {
+        updateFiles("gallery", [fileData]);
+      }
+    }
+
+    setDrawerOpen(true);
+  };
+  return (
+    <label htmlFor="slideFile" className={className}>
+      <FaPlus />
+
+      <input
+        type="file"
+        id="slideFile"
+        className="sr-only"
+        onChange={handleFileChange}
+      />
+    </label>
   );
 };

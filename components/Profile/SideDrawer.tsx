@@ -104,7 +104,11 @@ export default function SideDrawer() {
     }
   }, [blockType]);
   return (
-    <div className={`w-full h-screen ${isDrawerOpen ? "block" : "hidden"}`}>
+    <div
+      className={`w-full h-screen transition-all duration-300 ease-in-out transform ${
+        isDrawerOpen ? "block" : "hidden"
+      }`}
+    >
       <div className="flex w-full h-screen shadow-2xl">
         <div className="w-80 p-8 overflow-y-auto h-full">
           <button onClick={toggleDrawer} className="text-sm">

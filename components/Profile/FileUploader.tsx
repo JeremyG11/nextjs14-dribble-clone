@@ -44,7 +44,7 @@ const FileUploader = ({ onFilesChange }: FileUploaderProps) => {
     <div className="relative w-full h-full">
       <label
         htmlFor="dropzone-file"
-        className="relative p-3 flex flex-col justify-center w-full h-screen max-w-5xl mx-auto border-2 rounded-lg border-gray-300 cursor-pointer"
+        className="relative p-3 flex flex-col justify-center w-full h-screen max-w-5xl mx-auto border-2 border-dashed rounded-lg border-gray-300 cursor-pointer"
       >
         <div className="z-30 flex flex-col items-center justify-center pt-5 pb-6 space-y-8">
           <div className="flex flex-col items-center justify-center space-y-3">

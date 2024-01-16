@@ -30,10 +30,12 @@ export const AddBlock = () => {
       >
         <button
           onClick={handleClick}
-          className="flex items-center text-sm font-medium p-2.5 px-12 border border-gray-200 text-gray-500 rounded-full"
+          className="group flex items-center text-sm font-medium p-2.5 border-gray-200 text-gray-500 rounded-full hover:border-2 hover:px-12 border transition-all duration-300 ease-in-out"
         >
           <FaPlus className="text-lg text-black font-black" />
-          <span className="mx-2 font-normal">Insert Block</span>
+          <span className="hidden group-hover:block group-hover:mx-2 font-normal">
+            Insert Block
+          </span>
         </button>
       </TooltipButton>
       <span className="h-[2px] flex-1 bg-gray-200"></span>
