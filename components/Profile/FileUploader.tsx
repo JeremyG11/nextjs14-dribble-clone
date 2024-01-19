@@ -1,28 +1,44 @@
 "use client";
 import Image from "next/image";
-import React, { ChangeEvent } from "react";
+import { FileWithPath } from "@uploadthing/react";
 import { FileData, useBlock } from "@/hooks/toggle";
+import { useDropzone } from "@uploadthing/react/hooks";
 import imageIcon from "@/public/images/shotUploadIcon.png";
+import { generateClientDropzoneAccept } from "uploadthing/client";
+import React, {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+} from "react";
 
 interface FileUploaderProps {
   onFilesChange: (files: File[]) => void;
+  setFiles: Dispatch<SetStateAction<File[]>>;
 }
 
-const FileUploader = ({ onFilesChange }: FileUploaderProps) => {
+const FileUploader = ({ onFilesChange, setFiles }: FileUploaderProps) => {
   const { onOpenBlock, updateFiles, setDrawerOpen } = useBlock();
 
   const createFileData = (file: File): FileData => {
-    const fileUrl = URL.createObjectURL(file);
     const fileType = file.type.split("/")[0];
-    return { url: fileUrl, type: fileType };
+    return { file: file, type: fileType };
   };
+
+  const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
+    setFiles(acceptedFiles);
+  }, []);
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop,
+    accept: "image/*" ? generateClientDropzoneAccept(["image/*"]) : undefined,
+  });
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const selectedFiles = Array.from(e.target.files);
 
       const selectedFileData = selectedFiles.map(createFileData);
-
       onFilesChange(selectedFiles);
 
       const fileType = selectedFiles[0].type.split("/")[0];
@@ -33,7 +49,6 @@ const FileUploader = ({ onFilesChange }: FileUploaderProps) => {
         onOpenBlock("video");
         updateFiles("video", selectedFileData);
       } else {
-        // Handle edge case where file type is neither "image" nor "video"
         console.error(`Unsupported file type: ${fileType}`);
       }
 
@@ -41,7 +56,7 @@ const FileUploader = ({ onFilesChange }: FileUploaderProps) => {
     }
   };
   return (
-    <div className="relative w-full h-full">
+    <div {...getRootProps()} className="relative w-full h-full">
       <label
         htmlFor="dropzone-file"
         className="relative p-3 flex flex-col justify-center w-full h-screen max-w-5xl mx-auto border-2 border-dashed rounded-lg border-gray-300 cursor-pointer"
@@ -68,6 +83,7 @@ const FileUploader = ({ onFilesChange }: FileUploaderProps) => {
         </div>
 
         <input
+          {...getInputProps()}
           id="dropzone-file"
           type="file"
           className="hidden"

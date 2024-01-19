@@ -9,7 +9,7 @@ export type BlockType =
   | "gallery";
 
 export type FileData = {
-  url: string;
+  file: File;
   type: string;
 };
 

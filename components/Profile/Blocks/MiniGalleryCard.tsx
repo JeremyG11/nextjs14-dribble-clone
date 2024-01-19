@@ -1,8 +1,9 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import { FileData } from "@/hooks/toggle";
 import { BsFillTrash3Fill } from "react-icons/bs";
-import Image from "next/image";
+import { createFileUrl } from "@/libs/utils/createFileUrl";
 
 interface MiniGalleryCardProps {
   file: FileData;
@@ -16,7 +17,7 @@ const MiniGalleryCard = ({ file, setSelectedFile }: MiniGalleryCardProps) => {
       onClick={() => setSelectedFile(file)}
     >
       <Image
-        src={file.url}
+        src={createFileUrl(file.file)}
         alt={file.type}
         layout="fill"
         className="w-full h-full object-cover rounded-lg"

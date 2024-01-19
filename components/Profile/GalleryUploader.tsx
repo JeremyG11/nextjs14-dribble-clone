@@ -2,24 +2,20 @@
 
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
+
+import { FileData } from "@/hooks/toggle";
+import { useLayoutStore } from "@/hooks/layout";
+import { createFileUrl } from "@/libs/utils/createFileUrl";
 import MiniGalleryCard from "./Blocks/MiniGalleryCard";
 import { MiniGalleryUploader } from "./Blocks/GalleryBlock";
 
-import { useLayoutStore } from "@/hooks/layout";
-
-interface File {
-  type: string;
-  url: string;
-}
-
 interface GalleryBlockProps {
-  files: File[];
-  blockType: string;
+  files: FileData[];
 }
 
-const GalleryUploader = ({ files, blockType }: GalleryBlockProps) => {
+const GalleryUploader = ({ files }: GalleryBlockProps) => {
   const { layout } = useLayoutStore();
-  const [selectedFile, setSelectedFile] = useState<File>(files[0]);
+  const [selectedFile, setSelectedFile] = useState<FileData>(files[0]);
 
   useEffect(() => {
     setSelectedFile(files[0]);
@@ -34,12 +30,12 @@ const GalleryUploader = ({ files, blockType }: GalleryBlockProps) => {
       >
         <div className="relative h-5/6">
           {selectedFile.type === "video" ? (
-            <video src={selectedFile.url} controls>
+            <video src={createFileUrl(selectedFile.file)} controls>
               Your browser does not support the video tag.
             </video>
           ) : (
             <Image
-              src={selectedFile.url}
+              src={createFileUrl(selectedFile.file)}
               alt={selectedFile.type}
               fill
               className="w-full h-full object-cover rounded-xl"

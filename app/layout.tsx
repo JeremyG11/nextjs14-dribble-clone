@@ -1,7 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { IBM_Plex_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import { IBM_Plex_Sans } from "next/font/google";
+import { ModalProvider } from "@/components/Providers/modal.provider";
 
 const font = IBM_Plex_Sans({
   subsets: ["cyrillic"],
@@ -21,7 +22,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body className={font.className}>{children}</body>
+        <body className={font.className}>
+          <ModalProvider />
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );

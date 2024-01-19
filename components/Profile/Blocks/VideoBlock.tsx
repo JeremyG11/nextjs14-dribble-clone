@@ -4,6 +4,7 @@ import { useBlock } from "@/hooks/toggle";
 import AltText from "../../Reusable/AltText";
 import MediaUpload from "../../Reusable/MediaUpload";
 import AdjustLayout from "../../Reusable/AdjustLayout";
+import { createFileUrl } from "@/libs/utils/createFileUrl";
 
 export const VideoBlock = () => {
   const { boardData } = useBlock();
@@ -12,7 +13,7 @@ export const VideoBlock = () => {
   if (Array.isArray(boardData?.video)) {
     mediaSrcUrl = boardData?.video[0];
   } else if (boardData?.video && "files" in boardData?.video) {
-    mediaSrcUrl = boardData?.video?.files[0]?.url;
+    mediaSrcUrl = createFileUrl(boardData.video?.files[0].file);
   }
 
   return (

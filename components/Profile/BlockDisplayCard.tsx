@@ -6,6 +6,7 @@ import BlockUploader from "./BlockUploader";
 import { useLayoutStore } from "@/hooks/layout";
 import { BlockType, useBlock } from "@/hooks/toggle";
 import GalleryUploader from "./GalleryUploader";
+import { createFileUrl } from "@/libs/utils/createFileUrl";
 
 export default function BlockDisplayCard() {
   const { layout } = useLayoutStore();
@@ -21,7 +22,6 @@ export default function BlockDisplayCard() {
   };
 
   useEffect(() => {}, [layout]);
-  const galleryBlock = boardData["gallery"];
 
   return (
     <div className="w-full h-auto space-y-24">
@@ -29,13 +29,7 @@ export default function BlockDisplayCard() {
         const block = boardData[blockKey as BlockType];
         if (typeof block === "object" && block !== null && "files" in block) {
           if (blockKey === "gallery") {
-            return (
-              <GalleryUploader
-                key={blockKey}
-                files={block.files}
-                blockType={blockKey as BlockType}
-              />
-            );
+            return <GalleryUploader key={blockKey} files={block.files} />;
           } else if (block.files.length > 0) {
             return block.files.map((file, index) => (
               <div
@@ -52,13 +46,13 @@ export default function BlockDisplayCard() {
                     loop
                     muted
                   >
-                    <source src={file.url} type="video/mp4" />
+                    <source src={createFileUrl(file.file)} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 ) : (
                   <Image
                     key={`${blockKey}-${index}`}
-                    src={file.url}
+                    src={createFileUrl(file.file)}
                     alt={blockKey}
                     fill
                     className="w-full h-full object-cover rounded-xl"
