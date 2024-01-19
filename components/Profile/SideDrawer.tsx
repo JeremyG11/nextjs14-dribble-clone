@@ -102,7 +102,7 @@ export default function SideDrawer() {
         onOpenBlock("index");
         break;
     }
-  }, [blockType]);
+  }, [onOpenBlock, blockType]);
   return (
     <div
       className={`w-full h-screen transition-all duration-300 ease-in-out transform ${

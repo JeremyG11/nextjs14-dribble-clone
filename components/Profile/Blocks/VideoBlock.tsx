@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useBlock } from "@/hooks/toggle";
 import AltText from "../../Reusable/AltText";
 import MediaUpload from "../../Reusable/MediaUpload";
@@ -38,11 +39,7 @@ export const VideoBlock = () => {
           <span className="mx-2.5 font-normal">Video</span>
         </div>
         <div>
-          {false ? (
-            <img src={"URL.createObjectURL()"} />
-          ) : (
-            <MediaUpload mediaType="video" mediaSrcUrl={mediaSrcUrl} />
-          )}
+          <MediaUpload mediaType="video" mediaSrcUrl={mediaSrcUrl} />
           <AltText
             label="Alt Text"
             placeholder="Enter Text..."

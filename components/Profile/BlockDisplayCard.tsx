@@ -31,6 +31,7 @@ export default function BlockDisplayCard() {
           if (blockKey === "gallery") {
             return (
               <GalleryUploader
+                key={blockKey}
                 files={block.files}
                 blockType={blockKey as BlockType}
               />
