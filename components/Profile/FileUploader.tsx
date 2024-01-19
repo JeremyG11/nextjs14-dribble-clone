@@ -59,27 +59,32 @@ const FileUploader = ({ onFilesChange, setFiles }: FileUploaderProps) => {
     <div {...getRootProps()} className="relative w-full h-full">
       <label
         htmlFor="dropzone-file"
-        className="relative p-3 flex flex-col justify-center w-full h-screen max-w-5xl mx-auto border-2 border-dashed rounded-lg border-gray-300 cursor-pointer"
+        className="relative p-3 max-w-5xl mx-auto flex flex-col justify-center w-full h-screen border-2 border-gray-300 border-dashed rounded-lg cursor-pointer"
       >
         <div className="z-30 flex flex-col items-center justify-center pt-5 pb-6 space-y-8">
           <div className="flex flex-col items-center justify-center space-y-3">
-            <Image
-              src={imageIcon}
-              alt=""
-              width={80}
-              height={100}
-              className=""
-            />
+            <Image src={imageIcon} alt="" width={80} height={100} />
             <p className="mb-2 text-gray-500">
-              Drag and drop files, or
-              <span className="border-b-2 pb-0.5 mx-1 border-pink-500">
+              Drag and drop image, or
+              <span className="border-b-2 pb-0,5 mx-1 border-pink-500">
                 Browse
               </span>
             </p>
-            <p className="text-gray-500">
-              Images (png, jpg, gif) or Videos (mp4)
+            <p className=" text-gray-500">
+              Minimum 1600px width recommended. Max 10MB each (20MB for videos)
             </p>
           </div>
+
+          <ul className="w-full mt-8 space-y-1 flex items-center justify-evenly text-gray-500 list-disc list-inside ">
+            <div>
+              <li>High resolution images (png, jpg, gif)</li>
+              <li>Animated gifs</li>
+            </div>
+            <div>
+              <li>Videos (mp4)</li>
+              <li>Only upload media you own the rights to</li>
+            </div>
+          </ul>
         </div>
 
         <input
