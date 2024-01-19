@@ -1,5 +1,5 @@
+import { prisma } from "@/libs/prisma";
 import { auth, currentUser, redirectToSignIn } from "@clerk/nextjs";
-import { prisma } from "@/libs/prisma.client";
 
 export const getAuthUser = async () => {
   const user = await currentUser();
