@@ -1,5 +1,22 @@
 import React from "react";
 
-export default function InputField() {
-  return <div>InputField</div>;
+interface InputFieldProps {
+  label?: string;
+  placeholder: string;
+  onClick?: (event: MouseEvent) => void;
+}
+export default function InputField({ label, placeholder }: InputFieldProps) {
+  return (
+    <div className="group w-full">
+      <label htmlFor="file" className="block font-normal py-1.5 ">
+        {label}
+      </label>
+
+      <input
+        type="text"
+        placeholder={`${placeholder}`}
+        className="block w-full placeholder-gray-400/70 rounded-xl border border-gray-200 bg-white px-5 py-3 text-gray-700 focus:border-pink-300 focus:outline-none focus:ring-2 focus:ring-pink-200 group-hover:ring-pink-200  focus:ring-opacity-40 "
+      />
+    </div>
+  );
 }

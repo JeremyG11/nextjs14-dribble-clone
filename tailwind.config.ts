@@ -24,7 +24,9 @@ const config: Config = {
       },
       backgroundColor: {
         primary: "#0d0c22",
+        primaryBtn: "#1a1a2e",
       },
+
       animation: {
         "infinite-scroll": "infinite-scroll 25s linear infinite",
       },
