@@ -24,6 +24,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.49.3",
     "react-icons": "^4.12.0",
+    "react-tag-input-component": "^2.0.2",
     "uploadthing": "^6.1.1",
     "zod": "^3.22.4",
     "zustand": "^4.4.7"

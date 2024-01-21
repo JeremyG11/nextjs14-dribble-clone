@@ -27,9 +27,9 @@ export default function Modal({ children, isOpen, title }: ModalProps) {
     <div
       ref={ref}
       onClick={handleBackdropClick}
-      className="bg-black/70 overflow-y-auto overflow-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-full max-h-full"
+      className=" bg-black/70 overflow-y-auto hide-scroll-bar fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full min-h-full"
     >
-      <div className=" relative p-4 w-full xl:max-w-4xl">
+      <div className="relative p-4 w-full xl:max-w-4xl overflow-y-auto hide-scroll-bar max-h-full">
         <div className="relative w-full bg-white rounded-xl shadow-2xl">
           <motion.div
             animate={isOpen ? "open" : "closed"}

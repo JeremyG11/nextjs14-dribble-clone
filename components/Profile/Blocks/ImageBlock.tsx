@@ -13,7 +13,7 @@ export const ImageBlock = () => {
   if (Array.isArray(boardData.image)) {
     mediaSrcUrl = boardData.image[0];
   } else if (boardData.image && "files" in boardData.image) {
-    mediaSrcUrl = createFileUrl(boardData.image.files[0].file);
+    mediaSrcUrl = createFileUrl(boardData.image.files[0]?.file);
   }
 
   return (

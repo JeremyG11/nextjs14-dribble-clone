@@ -1,6 +1,5 @@
 "use client";
-import { useForm } from "react-hook-form";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { AddBlock } from "./AddBlock";
 import { useModal } from "@/hooks/modal";
@@ -8,15 +7,11 @@ import SideDrawer from "./SideDrawer";
 import { Button } from "../Reusable/Button";
 import FileUploader from "./FileUploader";
 import { useBlock } from "@/hooks/toggle";
-import { Shot } from "@/schemas/ShotSchema";
 import BlockDisplayCard from "./BlockDisplayCard";
-import { createShot } from "@/libs/actions/shot.actions";
-import { useUploadThing } from "@/libs/uploadthing";
 
 export default function ShotUploadForm() {
   const { isDrawerOpen, boardData } = useBlock();
   const isFileSelected = Object.keys(boardData).length !== 0;
-  const { register, handleSubmit, setValue } = useForm();
 
   const [files, setFiles] = useState<File[]>([]);
   const { onOpen, isOpen } = useModal();
@@ -29,25 +24,6 @@ export default function ShotUploadForm() {
     };
 
     reader.readAsDataURL(new Blob([selectedFile]));
-  };
-
-  const { startUpload } = useUploadThing("imageUploader");
-
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    // let uploadedImageUrl = values.fileUrl;
-    // if (files.length > 0) {
-    //   if (!uploadedImages) {
-    //     return;
-    //   }
-    // uploadedImageUrl = uploadedImages[0].url;
-    // }
-    // const res = await createShot();
-    if (boardData["gallery"]?.files) {
-      const uploadedImages = await startUpload(
-        boardData["gallery"].files.map((fileData) => fileData.file)
-      );
-      console.log(uploadedImages);
-    }
   };
 
   return (
@@ -79,7 +55,7 @@ export default function ShotUploadForm() {
             isDrawerOpen ? "mx-0" : "mx-8 xl:mx-40"
           } pt-14 xl:h-full `}
         >
-          <form onSubmit={onSubmit} className="mt-14 w-full xl:h-auto ">
+          <div className="mt-14 w-full xl:h-auto ">
             {isFileSelected ? (
               <span className="py-5 flex items-center text-gray-400 text-2xl font-semibold sm:text-4xl xl:max-w-3xl">
                 <input
@@ -112,7 +88,7 @@ export default function ShotUploadForm() {
               <div className="w-8/12 mx-auto mt-8"></div>
               {isFileSelected && <AddBlock />}
             </>
-          </form>
+          </div>
         </div>
       </div>
       <div className="">
