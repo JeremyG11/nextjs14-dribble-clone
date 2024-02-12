@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 
-import { FileData } from "@/hooks/toggle";
+import { FileData } from "@/hooks/zustandStore";
 import { useLayoutStore } from "@/hooks/layout";
 import { createFileUrl } from "@/libs/utils/createFileUrl";
 import MiniGalleryCard from "./Blocks/MiniGalleryCard";

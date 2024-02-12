@@ -4,8 +4,8 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 
 import BlockUploader from "./BlockUploader";
 import { useLayoutStore } from "@/hooks/layout";
-import { BlockType, useBlock } from "@/hooks/toggle";
 import GalleryUploader from "./GalleryUploader";
+import { BlockType, useBlock } from "@/hooks/zustandStore";
 import { createFileUrl } from "@/libs/utils/createFileUrl";
 
 export default function BlockDisplayCard() {

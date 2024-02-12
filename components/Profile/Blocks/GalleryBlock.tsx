@@ -3,7 +3,7 @@ import { FaPlus } from "react-icons/fa6";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
-import { useBlock } from "@/hooks/toggle";
+import { useBlock } from "@/hooks/zustandStore";
 
 export const GalleryBlock = () => {
   return (

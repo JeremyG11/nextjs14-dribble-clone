@@ -10,6 +10,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ShotStatus {
+  DRAFT
+  PUBLISHED
+}
 
 model Profile {
   id       String      @id @default(cuid())
@@ -24,24 +28,19 @@ model Profile {
   shots    Shot[]
 }
 
+
 model Shot {
   id          String         @id @default(cuid())
   title       String
-  files       File[]      
+  files       String []
   gallery     Json?
+  status      ShotStatus @default(DRAFT)
+
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 
   userId      String
-  profile     Profile     @relation(fields: [userId], references: [id])
+  profile     Profile     @relation(fields: [userId], references: [userId])
 }
 
-model File {
-  id          String      @id @default(cuid())
-  fileMeta    Json
-  fileUrl     String
-  altText     String?
-
-  shotId      String
-  shot        Shot        @relation(fields: [shotId], references: [id])
-}
+ 

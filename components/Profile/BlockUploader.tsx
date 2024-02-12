@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ChangeEvent } from "react";
-import { BlockType, useBlock } from "@/hooks/toggle";
+import { BlockType, useBlock } from "@/hooks/zustandStore";
 
 interface UploaderProps {
   blockType: BlockType;
@@ -13,8 +13,7 @@ export default function BlockUploader({ blockType }: UploaderProps) {
     const file = event.target.files?.[0];
     if (file) {
       const fileUrl = URL.createObjectURL(file);
-      const fileData = { url: fileUrl, type: blockType };
-      updateFiles(blockType, [fileData]);
+      const fileData = { file: fileUrl, type: blockType };
     }
   }
 

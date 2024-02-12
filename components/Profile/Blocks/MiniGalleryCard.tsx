@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { FileData } from "@/hooks/toggle";
+import { FileData } from "@/hooks/zustandStore";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { createFileUrl } from "@/libs/utils/createFileUrl";
 

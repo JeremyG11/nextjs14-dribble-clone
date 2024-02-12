@@ -9,7 +9,7 @@ import TextBlockStyle from "./Blocks/TextBlockStyles";
 import { GalleryBlock } from "./Blocks/GalleryBlock";
 import { VideoBlock } from "./Blocks/VideoBlock";
 import { PastWorkBlock } from "./Blocks/PastWorkBlock";
-import { BlockType, useBlock } from "../../hooks/toggle";
+import { BlockType, useBlock } from "../../hooks/zustandStore";
 
 export default function SideDrawer() {
   const toggleDrawer = () => {

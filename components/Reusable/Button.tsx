@@ -1,17 +1,13 @@
-import React from "react";
+import React, { ButtonHTMLAttributes } from "react";
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className: string;
   children: React.ReactNode;
-  onClick?: () => void;
 }
-export function Button({ className, onClick, children }: ButtonProps) {
+
+export function Button({ className, children, ...props }: ButtonProps) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={`cursor-pointer rounded-full ${className}`}
-    >
+    <button type="button" className={`rounded-full ${className}`} {...props}>
       {children}
     </button>
   );

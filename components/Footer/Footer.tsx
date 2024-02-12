@@ -9,9 +9,9 @@ import FooterScrolingCards from "./FooterScrolingCards";
 export default function Footer() {
   return (
     <footer className="bg-white py-10 overflow-hidden ">
-      <div className="pb-10">
+      {/* <div className="pb-10">
         <FooterScrolingCards />
-      </div>
+      </div> */}
       <div className="space-y-6">
         <div className="relative flex items-center justify-between mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <Logo />

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { useBlock } from "../../../hooks/toggle";
+import { useBlock } from "../../../hooks/zustandStore";
 import { IconMap } from "../IconMap";
 
 export const TextBlock = () => {

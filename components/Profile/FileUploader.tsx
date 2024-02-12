@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { FileWithPath } from "@uploadthing/react";
-import { FileData, useBlock } from "@/hooks/toggle";
+import { FileData, useBlock } from "@/hooks/zustandStore";
 import { useDropzone } from "@uploadthing/react/hooks";
 import imageIcon from "@/public/images/shotUploadIcon.png";
 import { generateClientDropzoneAccept } from "uploadthing/client";

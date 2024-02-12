@@ -27,6 +27,7 @@ export interface Block {
   setDrawerOpen: (isOpen: boolean) => void;
   updateFiles: (type: BlockType, files: FileData[]) => void;
   removeFile: (type: BlockType, index: number) => void;
+  resetBoardData: () => void;
 }
 
 export const useBlock = create<Block>((set) => ({
@@ -61,4 +62,5 @@ export const useBlock = create<Block>((set) => ({
       }
       return state;
     }),
+  resetBoardData: () => set({ boardData: {} }),
 }));

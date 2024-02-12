@@ -1,47 +1,84 @@
 "use server";
 
-import { prisma } from "@/libs/prisma";
 import { auth } from "@clerk/nextjs";
+import { prisma } from "@/libs/prisma";
 import { revalidatePath } from "next/cache";
-import { Shot, ShotSchema } from "@/schemas/ShotSchema";
+import { Shot, ShotFile, FileSchema, ShotSchema } from "@/schemas/ShotSchema";
+import { NextResponse } from "next/server";
 
-export const createShot = async (data: Shot) => {
-  const { userId } = auth();
-
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-
-  const validatesFields = ShotSchema.safeParse(data);
-
-  if (!validatesFields.success) {
-    return {
-      erorr: validatesFields.error.flatten().fieldErrors,
-      mesage: "Invalid fields! Shot couldn't be created",
-    };
-  }
-  //  get the fields
-  const { title, files, gallery } = validatesFields.data;
+export const createShot = async (data: {}) => {
   try {
-    await prisma.shot.create({
+    const { userId } = auth();
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
+    // validate the fields of the shot
+    const validatesFields = ShotSchema.safeParse(data);
+
+    if (!validatesFields.success) {
+      return {
+        erorr: validatesFields.error.flatten().fieldErrors,
+        mesage: "Invalid fields! Shot couldn't be created",
+      };
+    }
+    //  get the fields
+    const { title } = validatesFields.data;
+
+    // create a shot with draft status
+    const shot = await prisma.shot.create({
       data: {
-        title,
         userId,
-        files: {
-          create: files.map((file) => ({
-            fileUrl: file.fileUrl,
-            fileMeta: file.fileMeta,
-            altText: file.altText,
-          })),
-        },
-        gallery,
+        title,
       },
     });
+    return {
+      success: true,
+      message: "Shot created successfully",
+      shot,
+    };
+  } catch (error: any) {
+    return new NextResponse("Shot Creation Error", { status: 500 });
+  }
+};
+// Publish shot
+export const publishShot = async (
+  id: string,
+  files: string[],
+  gallery: any
+) => {
+  const { userId } = auth();
+
+  try {
+    const shot = await prisma.shot.findFirst({
+      where: {
+        id: id,
+      },
+    });
+    if (!shot) {
+      throw new Error("Shot not found");
+    }
+    if (!userId || userId !== shot?.userId) {
+      throw new Error("Unauthorized");
+    }
+    // updates
+    const publishedShot = await prisma.shot.update({
+      where: {
+        id: shot.id,
+      },
+      data: {
+        status: "PUBLISHED",
+        gallery: gallery,
+        files: files,
+      },
+    });
+    return {
+      success: true,
+      shot: publishedShot,
+    };
   } catch (error: any) {
     return {
-      error,
-      message: "Something went wrong! Shot couldn't be created",
+      error: error.message,
     };
   }
-  revalidatePath("/shots");
 };
