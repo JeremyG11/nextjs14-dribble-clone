@@ -11,6 +11,7 @@ export type BlockType =
 export type FileData = {
   file: File;
   type: string;
+  altText: string;
 };
 
 export type BoardDataType = {

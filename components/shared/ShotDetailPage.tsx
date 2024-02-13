@@ -1,5 +1,7 @@
-import React from "react";
+"use client";
 import Image from "next/image";
+import { LuMail } from "react-icons/lu";
+import React, { useEffect, useState } from "react";
 
 import Avatar from "./Avatar";
 import { Button } from "./Button";
@@ -9,20 +11,46 @@ import { LikeButton } from "./LikeButton";
 import ProfileStatus from "./ProfileStatus";
 import { FavoriteButton } from "./FavoriteButton";
 import { ShotWithProfile } from "@/libs/definitions";
-import { IoMdContacts } from "react-icons/io";
 
 interface ShotDetailPageProps {
   shot: ShotWithProfile;
 }
 
 export default function ShotDetailPage({ shot }: ShotDetailPageProps) {
+  const [activeLink, setActiveLink] = useState<string | null>(null);
+  const [toggleNav, setToggleNav] = useState(false);
+
+  const [scrollActive, setScrollActive] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollActive(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <section className="bg-white ">
-      <nav className="md:text-sm p-4 lg:mx-auto">
-        <h1 className="text-2xl font-bold mx-auto lg:max-w-5xl ">
+      <nav
+        className={cn(
+          "md:text-sm lg:mx-auto w-full px-4  transition-all bg-white",
+          scrollActive && "fixed top-0 shadow-sm py-0 z-50"
+        )}
+      >
+        <h1
+          className={cn(
+            "text-2xl font-bold mx-auto lg:max-w-5xl ",
+            scrollActive && "hidden"
+          )}
+        >
           {shot.title} At the Airport
         </h1>
-        <div className="lg:max-w-5xl pt-6 md:pt-4 md:gap-x-14 justify-between items-center max-w-screen-xl md:mx-auto flex ">
+        <div className="lg:max-w-5xl py-2 md:py-0 md:gap-x-14 justify-between items-center max-w-screen-xl md:mx-auto flex ">
           <div className="flex items-center flex-row-reverse justify-between md:py-5 md:block">
             <ProfileStatus profile={shot.profile} />
           </div>
@@ -87,7 +115,7 @@ export default function ShotDetailPage({ shot }: ShotDetailPageProps) {
               "py-2.5 px-6 text-white text-sm font-medium bg-primary flex items-center justify-center"
             )}
           >
-            <IoMdContacts className="mx-2 w-4 h-4" />
+            <LuMail className="icon mx-2 w-4 h-4 " />
             Get in touch
           </Button>
         </div>
