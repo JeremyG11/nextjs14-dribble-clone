@@ -4,7 +4,7 @@ import { SlDiamond } from "react-icons/sl";
 import { TbWorldShare } from "react-icons/tb";
 import { PiCurrencyCircleDollarLight } from "react-icons/pi";
 
-import Badge from "../Reusable/Badge";
+import Badge from "../shared/Badge";
 
 const FeatureSection = () => {
   return (

@@ -1,10 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/Reusable/Button";
-import DropDown from "@/components/Reusable/DropDown";
+import { Button } from "@/components/shared/Button";
+import DropDown from "@/components/shared/DropDown";
 import ButtonTabs from "@/components/Profile/ButtonTabs";
-import TooltipButton from "@/components/Reusable/Tooltip";
+import TooltipButton from "@/components/shared/Tooltip";
 
 export default function Profile() {
   return (

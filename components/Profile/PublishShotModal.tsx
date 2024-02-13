@@ -3,13 +3,13 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import Modal from "../Reusable/Modal";
+import Modal from "../shared/Modal";
 import { useModal } from "@/hooks/modal";
 import ProfFeatures from "./ProFeatures";
 import { cn } from "@/libs/utils/tw.util";
 import { useForm } from "react-hook-form";
-import { Button } from "../Reusable/Button";
-import TagsInput from "../Reusable/InputTag";
+import { Button } from "../shared/Button";
+import TagsInput from "../shared/InputTag";
 import { useBlock } from "@/hooks/zustandStore";
 import { uploadFiles } from "@/libs/uploadthing";
 import { publishShot } from "@/libs/actions/shot.actions";

@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import ButtonBage from "../Reusable/ButtonBage";
+import ButtonBage from "../shared/ButtonBage";
 import Image from "next/image";
 
 export const InfiniteScrollCards = () => {

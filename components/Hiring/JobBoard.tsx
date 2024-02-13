@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "../Reusable/Button";
-import Badge from "../Reusable/Badge";
+import { Button } from "../shared/Button";
+import Badge from "../shared/Badge";
 
 export default function JobBoard() {
   return (

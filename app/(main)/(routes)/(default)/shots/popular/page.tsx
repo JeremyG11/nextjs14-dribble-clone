@@ -1,11 +1,11 @@
 import ShotCard from "../../../../../../components/Home/ShotCard";
-import ButtonBage from "../../../../../../components/Reusable/ButtonBage";
+import ButtonBage from "../../../../../../components/shared/ButtonBage";
 import ButtonTabListFilter from "../../../../../../components/Hiring/ButtonTabListFilter";
 import {
   Heading1,
   Heading2,
-} from "../../../../../../components/Reusable/Headings";
-import HugeSearch from "../../../../../../components/Reusable/HugeSearch";
+} from "../../../../../../components/shared/Headings";
+import HugeSearch from "../../../../../../components/shared/HugeSearch";
 import React from "react";
 
 export default function PopularShots() {

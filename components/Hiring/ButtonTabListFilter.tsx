@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { BiFilter } from "react-icons/bi";
 import { MdDone } from "react-icons/md";
 
-import DropDownButton from "../Reusable/DropDownButton";
-import { Button } from "../Reusable/Button";
+import DropDownButton from "../shared/DropDownButton";
+import { Button } from "../shared/Button";
 
 export default function ButtonTabListFilter() {
   const [isOpened, setIsOpened] = useState(false);

@@ -1,5 +1,6 @@
 import React from "react";
 import { prisma } from "@/libs/prisma";
+import ShotDetailPage from "@/components/shared/ShotDetailPage";
 
 export default async function ShotPage({
   params,
@@ -10,6 +11,9 @@ export default async function ShotPage({
     where: {
       id: params.shotId,
     },
+    include: {
+      profile: true,
+    },
   });
   if (!shot) {
     return {
@@ -17,5 +21,5 @@ export default async function ShotPage({
     };
   }
 
-  return <div>{shot.title}</div>;
+  return <ShotDetailPage shot={shot} />;
 }

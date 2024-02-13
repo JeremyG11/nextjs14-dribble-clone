@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../Reusable/Button";
+import { Button } from "../shared/Button";
 import { MdArrowBack, MdOutlineDone } from "react-icons/md";
 
 export default function HiringSuitePricingCard() {

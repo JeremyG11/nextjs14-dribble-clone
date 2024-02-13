@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Heading1 } from "../Reusable/Headings";
+import { Heading1 } from "../shared/Headings";
 import JobBoardPricingCard from "./JobBoardPricingCard";
 import HiringSuitePricingCard from "./HiringSuitePricingCard";
 

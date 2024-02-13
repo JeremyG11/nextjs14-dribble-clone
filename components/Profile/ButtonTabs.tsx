@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { Button } from "../Reusable/Button";
+import { Button } from "../shared/Button";
 import ShotCard from "../Home/ShotCard";
-import DropDown from "../Reusable/DropDown";
-import DropDownButton from "../Reusable/DropDownButton";
+import DropDown from "../shared/DropDown";
+import DropDownButton from "../shared/DropDownButton";
 
 export default function ButtonTabs() {
   const [isOpened, setIsOpened] = useState(false);

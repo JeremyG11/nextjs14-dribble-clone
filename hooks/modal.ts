@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-export type ModalType = "publishShotModal";
+export type ModalType = "publishShotModal" | "displayShotModal";
 
 interface ShotData {
   id: string;

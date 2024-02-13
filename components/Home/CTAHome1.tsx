@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../Reusable/Button";
+import { Button } from "../shared/Button";
 import Link from "next/link";
 import { Source_Serif_4 } from "next/font/google";
 

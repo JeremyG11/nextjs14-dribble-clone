@@ -3,11 +3,11 @@ import { redirectToSignIn } from "@clerk/nextjs";
 
 import Navbar from "@/components/Navbar";
 import { getAuthUser } from "@/libs/auth.user";
-import Badge from "@/components/Reusable/Badge";
+import Badge from "@/components/shared/Badge";
 import Footer from "@/components/Footer/Footer";
 import ShotCard from "@/components/Home/ShotCard";
 import CTAHome1 from "@/components/Home/CTAHome1";
-import { Button } from "@/components/Reusable/Button";
+import { Button } from "@/components/shared/Button";
 import { InfiniteScrollCards } from "@/components/Home/InfiniteScrollCards";
 
 const font = Source_Serif_4({

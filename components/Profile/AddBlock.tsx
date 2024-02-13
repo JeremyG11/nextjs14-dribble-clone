@@ -4,7 +4,7 @@ import React from "react";
 import { FaPlus } from "react-icons/fa6";
 
 import { useBlock } from "@/hooks/zustandStore";
-import TooltipButton from "../Reusable/Tooltip";
+import TooltipButton from "../shared/Tooltip";
 
 export const AddBlock = () => {
   const { setDrawerOpen, onOpenBlock } = useBlock();

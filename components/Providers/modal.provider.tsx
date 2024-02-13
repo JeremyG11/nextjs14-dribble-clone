@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { PublishShotModal } from "../Profile/PublishShotModal";
+import { DisplayShotModal } from "../shared/DisplayShotModal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -17,6 +18,7 @@ export const ModalProvider = () => {
   return (
     <>
       <PublishShotModal />
+      <DisplayShotModal />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { Button } from "../Reusable/Button";
+import { Button } from "../shared/Button";
 
 export default function ProfFeatures() {
   return (

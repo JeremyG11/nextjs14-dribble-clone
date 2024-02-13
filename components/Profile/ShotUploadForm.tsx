@@ -9,7 +9,7 @@ import { useModal } from "@/hooks/modal";
 import { cn } from "@/libs/utils/tw.util";
 import FileUploader from "./FileUploader";
 import { useBlock } from "@/hooks/zustandStore";
-import { Button } from "../Reusable/Button";
+import { Button } from "../shared/Button";
 import BlockDisplayCard from "./BlockDisplayCard";
 import { ShotSchema } from "@/schemas/ShotSchema";
 import { createShot } from "@/libs/actions/shot.actions";

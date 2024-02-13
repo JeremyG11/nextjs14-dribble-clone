@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 import { VscChromeClose } from "react-icons/vsc";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 
-import Logo from "./Reusable/Logo";
+import Logo from "./shared/Logo";
 import { Profile } from "@prisma/client";
 import SearchBar from "./Home/SearchBar";
-import { Button } from "./Reusable/Button";
+import { Button } from "./shared/Button";
 
 interface NavbarProps {
   profile: Profile | null;

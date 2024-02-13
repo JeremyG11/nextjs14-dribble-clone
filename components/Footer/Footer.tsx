@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../Reusable/Logo";
+import Logo from "../shared/Logo";
 import Link from "next/link";
 import { FaFacebookSquare } from "react-icons/fa";
 import { IoLogoPinterest } from "react-icons/io";

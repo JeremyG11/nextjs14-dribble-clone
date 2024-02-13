@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { useBlock } from "@/hooks/zustandStore";
-import AltText from "../../Reusable/AltText";
-import MediaUpload from "../../Reusable/MediaUpload";
-import AdjustLayout from "../../Reusable/AdjustLayout";
+import AltText from "../../shared/AltText";
+import MediaUpload from "../../shared/MediaUpload";
+import AdjustLayout from "../../shared/AdjustLayout";
 import { createFileUrl } from "@/libs/utils/createFileUrl";
 
 export const ImageBlock = () => {
