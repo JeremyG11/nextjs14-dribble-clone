@@ -11,8 +11,9 @@ import { useForm } from "react-hook-form";
 import { Button } from "../shared/Button";
 import TagsInput from "../shared/InputTag";
 import { useBlock } from "@/hooks/zustandStore";
-import { uploadFiles } from "@/libs/uploadthing";
 import { publishShot } from "@/libs/actions/shot.actions";
+import { uploadFilesAndReturnUrls } from "@/libs/utils/uploadFilesAndReturnUrls";
+import { TBoardData } from "@/libs/definitions";
 
 export function PublishShotModal() {
   const { isOpen, type, onClose, data } = useModal();
@@ -20,26 +21,20 @@ export function PublishShotModal() {
   const router = useRouter();
 
   const isPublishShotModal = isOpen && type === "publishShotModal";
-  type Uploader = "imageUploader" | "videoUploader" | "galleryUploader";
 
-  const uploadFilesAndReturnUrls = async (
-    uploader: Uploader,
-    filesData: any
-  ) => {
-    const files = filesData.map((fileData: any) => fileData.file);
-    const uploadedFiles = await uploadFiles(uploader, { files });
-    return uploadedFiles.map((file: any) => file.url);
+  const { reset, handleSubmit, formState } = useForm();
+  const { isSubmitting, isSubmitSuccessful } = formState;
+
+  const extractAltTexts = (boardData: TBoardData, fileType: string) => {
+    return boardData[fileType]?.files?.map((file) => file.altText);
   };
 
-  const { reset, register, handleSubmit, formState } = useForm();
-  const { isSubmitting, isSubmitSuccessful } = formState;
   const onSubmit = async () => {
     const id = data?.id;
     if (id) {
       try {
         let galleryImageUrls: string[] = [];
         let filesUrls: string[] = [];
-
         if (boardData["gallery"]?.files) {
           galleryImageUrls = await uploadFilesAndReturnUrls(
             "galleryUploader",
@@ -63,14 +58,21 @@ export function PublishShotModal() {
           filesUrls.push(videoUrl);
         }
 
-        const res = await publishShot(id, filesUrls, galleryImageUrls);
-        if (res?.success) {
-          router.refresh();
-          router.push(`/shots/${id}`);
-          onClose();
-          reset();
-          resetBoardData();
-        }
+        const imageAltTexts = extractAltTexts(boardData, "image");
+        const videoAltTexts = extractAltTexts(boardData, "video");
+        const galleryAltTexts = extractAltTexts(boardData, "gallery");
+
+        const res = await publishShot(id, filesUrls, galleryImageUrls, {
+          video: videoAltTexts,
+          image: imageAltTexts,
+          gallery: galleryAltTexts,
+        });
+
+        router.refresh();
+        router.push(`/shots/${id}`);
+        onClose();
+        reset();
+        resetBoardData();
       } catch (error: any) {
         console.log("Error", error.message);
       }

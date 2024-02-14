@@ -17,9 +17,6 @@ interface ShotDetailPageProps {
 }
 
 export default function ShotDetailPage({ shot }: ShotDetailPageProps) {
-  const [activeLink, setActiveLink] = useState<string | null>(null);
-  const [toggleNav, setToggleNav] = useState(false);
-
   const [scrollActive, setScrollActive] = useState(false);
 
   useEffect(() => {
@@ -33,7 +30,7 @@ export default function ShotDetailPage({ shot }: ShotDetailPageProps) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
+  console.log(shot.files);
   return (
     <section className="bg-white ">
       <nav
@@ -74,29 +71,37 @@ export default function ShotDetailPage({ shot }: ShotDetailPageProps) {
         </div>
       </nav>
       <div className="container flex flex-col items-center p-4 mx-auto xl:flex-row lg:max-w-5xl ">
-        <div className="relative w-full h-96 md:h-screen first-letter:flex justify-center overflow-hidden rounded-lg">
-          {shot.files.map((file) => {
+        <div className="bg-red-400">
+          {shot.files.map((fileUrl, index) => {
             return (
-              <>
-                {file.endsWith(".mp4") ? (
+              <div key={index}>
+                {fileUrl.endsWith(".mp4") ? (
                   <video
+                    key={index}
                     className="object-cover w-full h-full"
                     autoPlay
                     loop
                     muted
+                    onError={(e) => {
+                      console.error(`Error loading video: ${e}`);
+                    }}
                   >
-                    <source src={file} type="video/mp4" />
+                    <source src={fileUrl} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 ) : (
                   <Image
-                    className="h-80 w-80 sm:w-[28rem] sm:h-[28rem] flex-shrink-0 object-cover "
-                    src={shot.files[0]}
+                    key={index}
+                    className=" sm:w-[28rem] sm:h-[28rem] flex-shrink-0 object-cover h-full w-full"
+                    src={fileUrl}
                     alt=""
+                    onError={(e) => {
+                      console.error(`Error loading image: ${e}`);
+                    }}
                     fill
                   />
                 )}
-              </>
+              </div>
             );
           })}
         </div>

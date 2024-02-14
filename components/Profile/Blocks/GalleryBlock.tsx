@@ -83,7 +83,7 @@ export const MiniGalleryUploader = ({
       const selectedFile = e.target.files[0];
       setFile(selectedFile);
 
-      const fileData = { file: selectedFile, type: "mediaType" };
+      const fileData = { file: selectedFile, type: "mediaType", altText: "" };
 
       onOpenBlock("gallery");
       if (boardData?.gallery) {

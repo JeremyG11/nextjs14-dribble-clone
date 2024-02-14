@@ -32,6 +32,7 @@ export const createShot = async (data: {}) => {
         title,
       },
     });
+    revalidatePath(`/shots`);
     return {
       success: true,
       message: "Shot created successfully",
@@ -45,10 +46,11 @@ export const createShot = async (data: {}) => {
 export const publishShot = async (
   id: string,
   files: string[],
-  gallery: any
+  gallery: any,
+  atlTexts: { [key: string]: string[] }
 ) => {
   const { userId } = auth();
-
+  console.log("atlTexts", atlTexts);
   try {
     const shot = await prisma.shot.findFirst({
       where: {
@@ -70,6 +72,7 @@ export const publishShot = async (
         status: "PUBLISHED",
         gallery: gallery,
         files: files,
+        atlTexts,
       },
     });
     return {

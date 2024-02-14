@@ -1,7 +1,6 @@
 "use client";
-import Image from "next/image";
-import { useBlock } from "@/hooks/zustandStore";
 import AltText from "../../shared/AltText";
+import { useBlock } from "@/hooks/zustandStore";
 import MediaUpload from "../../shared/MediaUpload";
 import AdjustLayout from "../../shared/AdjustLayout";
 import { createFileUrl } from "@/libs/utils/createFileUrl";
@@ -13,7 +12,7 @@ export const VideoBlock = () => {
   if (Array.isArray(boardData?.video)) {
     mediaSrcUrl = boardData?.video[0];
   } else if (boardData?.video && "files" in boardData?.video) {
-    mediaSrcUrl = createFileUrl(boardData.video?.files[0].file);
+    mediaSrcUrl = createFileUrl(boardData.video?.files[0]?.file);
   }
 
   return (
@@ -41,11 +40,16 @@ export const VideoBlock = () => {
         </div>
         <div>
           <MediaUpload mediaType="video" mediaSrcUrl={mediaSrcUrl} />
-          <AltText
-            label="Alt Text"
-            placeholder="Enter Text..."
-            className="block w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-5 py-4 text-gray-700 focus:border-pink-300 focus:outline-none focus:ring focus:ring-pink-200 focus:ring-opacity-40"
-          />
+          {boardData.video?.files?.map((file, index) => (
+            <AltText
+              key={index}
+              blockType="video"
+              fileIndex={index}
+              label={`Alt Text ${index + 1}`}
+              placeholder="Enter Text..."
+              className="block w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-5 py-4 text-gray-700 focus:border-pink-300 focus:outline-none focus:ring focus:ring-pink-200 focus:ring-opacity-40"
+            />
+          ))}
           <AdjustLayout />
         </div>
       </div>

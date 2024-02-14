@@ -7,6 +7,7 @@ import { VscChromeClose } from "react-icons/vsc";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 
 import Logo from "./shared/Logo";
+import useMount from "@/hooks/mount";
 import { Profile } from "@prisma/client";
 import SearchBar from "./Home/SearchBar";
 import { Button } from "./shared/Button";
@@ -17,14 +18,13 @@ interface NavbarProps {
 export default function Navbar({ profile }: NavbarProps) {
   const [state, setState] = useState(false);
   const router = useRouter();
-  // Replace # paths with your paths
   useEffect(() => {
     document.onclick = (e) => {
       const target = e.target;
-      //   if (!target.closest(".menu-btn")) setState(false);
     };
   }, []);
-
+  const mount = useMount();
+  if (!mount) return null;
   return (
     <nav className={`bg-white md:text-sm p-4 `}>
       <div className="md:gap-x-14 justify-between items-center max-w-screen-xl md:mx-auto flex ">

@@ -28,6 +28,7 @@ export interface Block {
   setDrawerOpen: (isOpen: boolean) => void;
   updateFiles: (type: BlockType, files: FileData[]) => void;
   removeFile: (type: BlockType, index: number) => void;
+  updateAltText: (type: BlockType, index: number, alt: string) => void;
   resetBoardData: () => void;
 }
 
@@ -52,6 +53,23 @@ export const useBlock = create<Block>((set) => ({
       if (files.length > 0) {
         const newFiles = [...files];
         newFiles.splice(index, 1);
+        return {
+          boardData: {
+            ...state.boardData,
+            [type]: {
+              files: newFiles,
+            },
+          },
+        };
+      }
+      return state;
+    }),
+  updateAltText: (type, index, altText) =>
+    set((state) => {
+      const files = state.boardData[type]?.files || [];
+      if (files.length > index) {
+        const newFiles = [...files];
+        newFiles[index] = { ...newFiles[index], altText };
         return {
           boardData: {
             ...state.boardData,

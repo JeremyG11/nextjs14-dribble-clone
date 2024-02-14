@@ -42,11 +42,16 @@ export const ImageBlock = () => {
       </div>
       <div>
         <MediaUpload mediaType="image" mediaSrcUrl={mediaSrcUrl} />
-        <AltText
-          label="Alt Text"
-          placeholder="Enter Text..."
-          className="block w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-5 py-4 text-gray-700 focus:border-pink-300 focus:outline-none focus:ring focus:ring-pink-200 focus:ring-opacity-40"
-        />
+        {boardData.image?.files?.map((file, index) => (
+          <AltText
+            key={index}
+            blockType="image"
+            fileIndex={index}
+            label={`Alt Text ${index + 1}`}
+            placeholder="Enter Text..."
+            className="block w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-5 py-4 text-gray-700 focus:border-pink-300 focus:outline-none focus:ring focus:ring-pink-200 focus:ring-opacity-40"
+          />
+        ))}
         <AdjustLayout />
       </div>
     </div>

@@ -20,7 +20,7 @@ export default function MediaUpload({
       const selectedFile = e.target.files[0];
       setFile(selectedFile);
 
-      const fileData = { file: selectedFile, type: mediaType };
+      const fileData = { file: selectedFile, type: mediaType, altText: "" };
 
       if (mediaType === "image") {
         onOpenBlock("image");

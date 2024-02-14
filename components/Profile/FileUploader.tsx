@@ -1,38 +1,21 @@
 "use client";
 import Image from "next/image";
-import { FileWithPath } from "@uploadthing/react";
 import { FileData, useBlock } from "@/hooks/zustandStore";
-import { useDropzone } from "@uploadthing/react/hooks";
 import imageIcon from "@/public/images/shotUploadIcon.png";
-import { generateClientDropzoneAccept } from "uploadthing/client";
-import React, {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useCallback,
-} from "react";
+import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 interface FileUploaderProps {
   onFilesChange: (files: File[]) => void;
   setFiles: Dispatch<SetStateAction<File[]>>;
 }
 
-const FileUploader = ({ onFilesChange, setFiles }: FileUploaderProps) => {
+const FileUploader = ({ onFilesChange }: FileUploaderProps) => {
   const { onOpenBlock, updateFiles, setDrawerOpen } = useBlock();
 
   const createFileData = (file: File): FileData => {
     const fileType = file.type.split("/")[0];
-    return { file: file, type: fileType };
+    return { file: file, type: fileType, altText: "" };
   };
-
-  const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
-    setFiles(acceptedFiles);
-  }, []);
-
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    accept: "image/*" ? generateClientDropzoneAccept(["image/*"]) : undefined,
-  });
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -56,7 +39,7 @@ const FileUploader = ({ onFilesChange, setFiles }: FileUploaderProps) => {
     }
   };
   return (
-    <div {...getRootProps()} className="relative w-full h-full">
+    <div className="relative w-full h-full">
       <label
         htmlFor="dropzone-file"
         className="relative p-3 max-w-5xl mx-auto flex flex-col justify-center w-full h-screen border-2 border-gray-300 border-dashed rounded-lg cursor-pointer"
@@ -88,7 +71,6 @@ const FileUploader = ({ onFilesChange, setFiles }: FileUploaderProps) => {
         </div>
 
         <input
-          {...getInputProps()}
           id="dropzone-file"
           type="file"
           className="hidden"

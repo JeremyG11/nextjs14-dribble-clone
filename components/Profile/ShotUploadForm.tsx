@@ -97,7 +97,7 @@ export default function ShotUploadForm() {
                     placeholder=" Give me a name"
                     {...register("title", {
                       required: true,
-                      maxLength: 20,
+                      maxLength: 32,
                     })}
                     onChange={(e) => setTitle(e.target.value)}
                     className="mx-auto outline-none placeholder:text-gray-400"
