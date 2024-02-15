@@ -26,21 +26,17 @@ export default function DropDown() {
         <div className="absolute left-0 z-10 mt-2 w-48 rounded-md border border-gray-100 text-gray-500 shadow-sm">
           <div className="">
             <ul className="p-2">
-              <li>
-                <Link href="" className="text-[13px] truncate">
-                  Add or remove from the lists
-                </Link>
-              </li>
-              <li>
-                <Link href="" className="text-[13px] truncate">
-                  Edit your account settings
-                </Link>
-              </li>
-              <li>
-                <Link href="" className="text-[13px] truncate">
-                  Edit your work preferences
-                </Link>
-              </li>
+              {[
+                "Add or remove from the lists",
+                "Edit your account settings",
+                "Edit your work preferences",
+              ].map((item, i) => (
+                <li key={i}>
+                  <Link href="" className="text-[13px] truncate">
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

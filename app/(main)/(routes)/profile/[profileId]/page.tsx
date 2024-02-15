@@ -1,23 +1,24 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { redirect } from "next/navigation";
+
+import { authProfile } from "@/libs/auth.user";
 import { Button } from "@/components/shared/Button";
 import DropDown from "@/components/shared/DropDown";
-import ButtonTabs from "@/components/Profile/ButtonTabs";
 import TooltipButton from "@/components/shared/Tooltip";
+import ButtonTabs from "@/components/Profile/ButtonTabs";
 
-export default function Profile() {
+export default async function Profile() {
+  const profile = await authProfile();
+  if (!profile) {
+    return redirect("/sign-in");
+  }
   return (
     <main>
       <div className="py-14 flex justify-center max-w-screen-xl mx-auto px-4  md:px-8 ">
-        <div className="rounded-full h-10 w-10 xl:w-32 xl:h-32 bg-slate-900 xl:mx-10">
-          <Image
-            src="https://cdn.dribbble.com/users/14860331/avatars/normal/data?1674854196"
-            alt=""
-            className="rounded-full"
-            width={100}
-            height={100}
-          />
+        <div className="relative rounded-full h-10 w-10 xl:w-32 xl:h-32 xl:mx-10">
+          <Image src={profile.imageUrl} alt="" className="rounded-full" fill />
         </div>
 
         <div className="py-3">

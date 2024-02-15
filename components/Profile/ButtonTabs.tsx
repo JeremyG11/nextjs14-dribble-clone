@@ -26,7 +26,7 @@ export default function ButtonTabs() {
             ))}
           </div>
           <div className="flex items-center justify-between">
-            <div className="relative">
+            <div className="relative mx-4">
               <DropDownButton
                 title="Recent Shots"
                 isOpened={isOpened}
@@ -36,15 +36,17 @@ export default function ButtonTabs() {
               {isOpened && (
                 <div className="absolute left-0 z-10 mt-2 rounded-md border border-gray-100 bg-white ">
                   <ul>
-                    <li>
-                      <a href="">Add or remove from the lists</a>
-                    </li>
-                    <li>
-                      <a href="">Edit your account settings</a>
-                    </li>
-                    <li>
-                      <a href="">Edit your work preferences</a>
-                    </li>
+                    {[
+                      "Add or remove from the lists",
+                      "Edit your account settings",
+                      "Edit your work preferences",
+                    ].map((item, i) => {
+                      return (
+                        <li key={i}>
+                          <a href="">{item}</a>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               )}
@@ -58,7 +60,7 @@ export default function ButtonTabs() {
           </div>
         </nav>
       </div>
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-4 gap-8">
         {[3, 6, 8, 7, 34, 9].map((btn, i) => (
           <div key={i}>
             <ShotCard key={btn} />

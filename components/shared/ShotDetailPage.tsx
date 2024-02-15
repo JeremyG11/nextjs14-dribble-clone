@@ -11,6 +11,7 @@ import { LikeButton } from "./LikeButton";
 import ProfileStatus from "./ProfileStatus";
 import { FavoriteButton } from "./FavoriteButton";
 import { ShotWithProfile } from "@/libs/definitions";
+import MediaDisplay from "./MediaDisplay";
 
 interface ShotDetailPageProps {
   shot: ShotWithProfile;
@@ -71,40 +72,8 @@ export default function ShotDetailPage({ shot }: ShotDetailPageProps) {
         </div>
       </nav>
       <div className="container flex flex-col items-center p-4 mx-auto xl:flex-row lg:max-w-5xl ">
-        <div className="flex flex-col min-h-screen h-full">
-          {shot.files.map((fileUrl, index) => {
-            return (
-              <div key={index} className="w-full h-full xl:min-h-full">
-                {fileUrl.endsWith(".mp4") ? (
-                  <video
-                    key={index}
-                    className=" h-[500px] w-[1100px] bg-red-600"
-                    autoPlay
-                    loop
-                    muted
-                    onError={(e) => {
-                      console.error(`Error loading video: ${e}`);
-                    }}
-                  >
-                    <source src={fileUrl} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                ) : (
-                  <Image
-                    key={index}
-                    className="h-full w-full"
-                    src={fileUrl}
-                    alt=""
-                    onError={(e) => {
-                      console.error(`Error loading image: ${e}`);
-                    }}
-                    fill
-                  />
-                )}
-                {/* <div "></div> */}
-              </div>
-            );
-          })}
+        <div className="flex flex-col h-full">
+          <MediaDisplay files={shot.files} />
         </div>
       </div>
       <div className="mx-auto lg:max-w-5xl lg:my-20">
