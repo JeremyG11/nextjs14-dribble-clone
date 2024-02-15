@@ -71,14 +71,14 @@ export default function ShotDetailPage({ shot }: ShotDetailPageProps) {
         </div>
       </nav>
       <div className="container flex flex-col items-center p-4 mx-auto xl:flex-row lg:max-w-5xl ">
-        <div className="bg-red-400">
+        <div className="flex flex-col min-h-screen h-full">
           {shot.files.map((fileUrl, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="w-full h-full xl:min-h-full">
                 {fileUrl.endsWith(".mp4") ? (
                   <video
                     key={index}
-                    className="object-cover w-full h-full"
+                    className=" h-[500px] w-[1100px] bg-red-600"
                     autoPlay
                     loop
                     muted
@@ -92,7 +92,7 @@ export default function ShotDetailPage({ shot }: ShotDetailPageProps) {
                 ) : (
                   <Image
                     key={index}
-                    className=" sm:w-[28rem] sm:h-[28rem] flex-shrink-0 object-cover h-full w-full"
+                    className="h-full w-full"
                     src={fileUrl}
                     alt=""
                     onError={(e) => {
@@ -101,6 +101,7 @@ export default function ShotDetailPage({ shot }: ShotDetailPageProps) {
                     fill
                   />
                 )}
+                {/* <div "></div> */}
               </div>
             );
           })}
