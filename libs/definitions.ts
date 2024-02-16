@@ -15,3 +15,15 @@ export type TBoardData = {
     }[];
   };
 };
+
+export type EditNavLinks =
+  | "General"
+  | "Edit Profile"
+  | "Password"
+  | "Social Profiles"
+  | "Email Notifications"
+  | "Billing"
+  | "Sessions"
+  | "Applications"
+  | "Data Export"
+  | "Delete Account";

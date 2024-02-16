@@ -12,6 +12,7 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "subscription-bg": "linear-gradient(72deg,#f8d5d0 0%,#f5c9ef 100%)",
       },
       translate: {
         "1/2": "50%",

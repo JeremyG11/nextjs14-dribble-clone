@@ -13,7 +13,13 @@ export default function HiringPage() {
         <CTAHiring />
         <InfiniteScrollingLogos />
         <JobBoard />
-        <Testimonial />
+        <Testimonial
+          userImageUrl="https://framerusercontent.com/images/lSn7CdDjdm73O1nwfrasVIfPI.png"
+          userName="Lham Wakoa"
+          userTitle="Head of design, OneSignal"
+          quote="Dribbble is my go-to for hiring designers. It always provides a wealth of quality candidates and instantly builds my pipeline."
+          testinomialImageUrl="https://framerusercontent.com/images/S5BMILr4aSBsQ0mgFpf9Mtqgxc.svg"
+        />
         <FeatureSection />
         <CTAHiring2 />
       </div>

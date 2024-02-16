@@ -13,12 +13,14 @@ const font = Source_Serif_4({
 
 export function Heading1({ className, text }: HeadingProps) {
   return (
-    <h1 className={`${font.className} ${className} pt-14 md:text-6xl `}>
+    <h1
+      className={`text-4xl font-medium ${font.className} ${className} md:text-7xl `}
+    >
       {text}
     </h1>
   );
 }
 
 export function Heading2({ className, text }: HeadingProps) {
-  return <h1 className={`py-8 ${className} `}>{text}</h1>;
+  return <h1 className={`text-sm ${className} `}>{text}</h1>;
 }
