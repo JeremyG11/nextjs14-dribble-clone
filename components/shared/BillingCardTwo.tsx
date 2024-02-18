@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export default function BillingCardTwo() {
   return (
-    <div className="bg-white space-y-8 w-full max-w-2xl rounded-3xl flex flex-col p-10">
+    <div className="bg-white space-y-8 w-full max-w-xl rounded-3xl flex flex-col p-10 ">
       <h2 className="text-xl md:text-3xl font-medium">Pro</h2>
 
       <p className="mt-2 sm:mt-4 text-xl">

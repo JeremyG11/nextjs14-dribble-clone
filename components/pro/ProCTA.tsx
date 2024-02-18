@@ -25,7 +25,7 @@ export default function ProCTA() {
             <p className="">bililed annually</p>
             <Button
               // onClick={() => router.push("/uploads/new")}
-              className="py-4 px-8 bg-primary font-medium text-white rounded-full hover:opacity-60 hover:opacity-color:white"
+              className="py-4 px-12 bg-primary font-medium text-white rounded-full hover:opacity-60 hover:opacity-color:white"
             >
               Get started today
             </Button>

@@ -14,7 +14,7 @@ const font = Source_Serif_4({
 export function Heading1({ className, text }: HeadingProps) {
   return (
     <h1
-      className={`text-4xl font-medium ${font.className} ${className} md:text-7xl `}
+      className={`text-4xl font-medium ${font.className} ${className} md:text-6xl `}
     >
       {text}
     </h1>
