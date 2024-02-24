@@ -71,7 +71,7 @@ export default function Navbar({ profile }: NavbarProps) {
             </li>
             {[
               { title: "Jobs", path: "#" },
-              { title: "Go Pro", path: "#" },
+              { title: "Go Pro", path: "/pro" },
             ].map((item, idx) => {
               return (
                 <li

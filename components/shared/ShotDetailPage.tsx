@@ -7,11 +7,11 @@ import Avatar from "./Avatar";
 import { Button } from "./Button";
 import DividerLine from "./DividerLine";
 import { cn } from "@/libs/utils/tw.util";
+import MediaDisplay from "./MediaDisplay";
 import { LikeButton } from "./LikeButton";
 import ProfileStatus from "./ProfileStatus";
 import { FavoriteButton } from "./FavoriteButton";
 import { ShotWithProfile } from "@/libs/definitions";
-import MediaDisplay from "./MediaDisplay";
 
 interface ShotDetailPageProps {
   shot: ShotWithProfile;
@@ -72,7 +72,7 @@ export default function ShotDetailPage({ shot }: ShotDetailPageProps) {
         </div>
       </nav>
       <div className="container flex flex-col items-center p-4 mx-auto xl:flex-row lg:max-w-5xl ">
-        <div className="flex flex-col h-full">
+        <div className="relative flex flex-col w-full h-full">
           <MediaDisplay files={shot.files} />
         </div>
       </div>

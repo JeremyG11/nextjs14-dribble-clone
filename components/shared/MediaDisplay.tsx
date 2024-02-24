@@ -8,11 +8,14 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ files }) => {
   return (
     <>
       {files.map((fileUrl, index) => (
-        <div key={index} className="w-96 h-96">
+        <div
+          key={index}
+          className="rounded-md overflow-hidden relative w-full h-[500px] "
+        >
           {fileUrl.endsWith(".mp4") ? (
             <video
               key={index}
-              className=" h-[500px] w-[1100px]"
+              className=" h-full w-full object-cover"
               autoPlay
               loop
               muted
@@ -27,7 +30,7 @@ const MediaDisplay: React.FC<MediaDisplayProps> = ({ files }) => {
             <div className="relative h-full w-full">
               <Image
                 key={index}
-                className="h-96 w-96"
+                className="h-full w-full object-cover"
                 src={fileUrl}
                 alt=""
                 onError={(e) => {

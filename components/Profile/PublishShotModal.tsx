@@ -1,19 +1,19 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
 import Modal from "../shared/Modal";
 import { useModal } from "@/hooks/modal";
 import ProfFeatures from "./ProFeatures";
 import { cn } from "@/libs/utils/tw.util";
-import { useForm } from "react-hook-form";
 import { Button } from "../shared/Button";
 import TagsInput from "../shared/InputTag";
 import { useBlock } from "@/hooks/zustandStore";
+import { TBoardData } from "@/libs/definitions";
 import { publishShot } from "@/libs/actions/shot.actions";
 import { uploadFilesAndReturnUrls } from "@/libs/utils/uploadFilesAndReturnUrls";
-import { TBoardData } from "@/libs/definitions";
 
 export function PublishShotModal() {
   const { isOpen, type, onClose, data } = useModal();
