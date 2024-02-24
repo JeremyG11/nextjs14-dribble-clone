@@ -1,11 +1,26 @@
 import React from "react";
+import Link from "next/link";
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 import { MdOutlineDone } from "react-icons/md";
 
-import { Button } from "../shared/Button";
+import { authProfile } from "@/libs/auth.user";
 import { proFeaturesData } from "@/libs/constants";
-import Link from "next/link";
+import SubcriptionFrom from "../pro/SubcriptionFrom";
+import { getUserSubscriptionPlan } from "@/libs/billingPlan";
 
-export default function BillingCardTwo() {
+export default async function BillingCardTwo() {
+  const plan = await getUserSubscriptionPlan();
+  const { user, userId } = auth();
+  const profile = await authProfile();
+
+  if (!profile) {
+    return redirect("/sign-in");
+  }
+  if (!userId) {
+    return null;
+  }
+  console.log("Profile planQ", plan);
   return (
     <div className="bg-white space-y-8 w-full max-w-xl rounded-3xl flex flex-col p-10 ">
       <h2 className="text-xl md:text-3xl font-medium">Pro</h2>
@@ -27,11 +42,18 @@ export default function BillingCardTwo() {
           </li>
         ))}
       </ul>
-      <Button className="mt-8 w-full block font-normal rounded-full bg-primary px-12 py-3 text-center text-sm text-white hover:ring-pink-700 focus:outline-none active:text-pink-500">
-        Get started today
-      </Button>
+
+      <SubcriptionFrom
+        userId={userId}
+        email={profile.email || ""}
+        stripePriceId={process.env.STRIPE_ANUAL_PRO_PRICE_ID ?? ""}
+        stripeCustomerId={plan?.stripeCustomerId}
+        isSubscribed={!!plan.isSubscribed}
+        isCurrentPlan={plan?.type === plan.type}
+      />
+
       <p className="mt-4 font-light text-center ">
-        Prefer a monthly subscription?{" "}
+        Prefer a monthly subscription?
         <Link href="#" className="font-medium underline">
           Subscribe for $16/mo
         </Link>

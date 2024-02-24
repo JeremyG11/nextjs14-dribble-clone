@@ -13,11 +13,13 @@ import { Button } from "../shared/Button";
 import BlockDisplayCard from "./BlockDisplayCard";
 import { ShotSchema } from "@/schemas/ShotSchema";
 import { createShot } from "@/libs/actions/shot.actions";
+import { useRouter } from "next/navigation";
 
 export default function ShotUploadForm() {
   const { isDrawerOpen, boardData } = useBlock();
   const isFileSelected = Object.keys(boardData).length !== 0;
 
+  const router = useRouter();
   const [files, setFiles] = useState<File[]>([]);
   const { onOpen, isOpen, setData } = useModal();
   const [title, setTitle] = useState("");
@@ -52,14 +54,17 @@ export default function ShotUploadForm() {
   };
 
   return (
-    <div className="flex w-full min-w-full max-h-screen">
+    <div className="lg:flex w-full min-w-full max-h-screen">
       <div className="relative flex-grow overflow-y-auto hide-scroll-bar">
         <div
           className={`px-6 w-full z-10 flex justify-between  top-6  ${
             isFileSelected ? "absolute" : "sticky"
           }`}
         >
-          <Button className="border py-2 px-5 text-sm font-medium">
+          <Button
+            onClick={() => router.push("/")}
+            className="border py-2 px-5 text-sm font-medium"
+          >
             Cancel
           </Button>
 

@@ -1,20 +1,24 @@
 import React from "react";
 import Image from "next/image";
+import { ShotWithProfile } from "@/libs/definitions";
 
-export default function ShotCard() {
+interface ShotCardProps {
+  shot: ShotWithProfile;
+}
+export default function ShotCard({ shot }: ShotCardProps) {
+  const bgImage = shot?.files.find((file) =>
+    file.endsWith("png" || "jpg" || "jpeg")
+  );
   return (
     <div>
       <div
-        className="group cursor-pointer flex items-end overflow-hidden bg-cover rounded-lg w-full h-56"
+        className="group bg-gray-100 cursor-pointer flex items-end overflow-hidden bg-cover rounded-lg w-full h-56"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1603380353725-f8a4d39cc41e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80')",
+          backgroundImage: `url(${bgImage})`,
         }}
       >
-        <div className=" hidden group-hover:flex items-center justify-between w-full  p-4 py-6 overflow-hidden rounded-b-lg cursor-pointer group-hover:bg-gradient-to-t from-zinc-600 via-zinc-400 to-transparent transition-all duration-150">
-          <h2 className=" truncate capitalize text-white">
-            Onpoint- Brands blah blah blah
-          </h2>
+        <div className=" hidden group-hover:flex items-center justify-between w-full py-6 overflow-hidden rounded-b-lg cursor-pointer group-hover:bg-gradient-to-t from-zinc-600 via-zinc-400 to-transparent transition-all duration-150">
+          <h2 className=" truncate capitalize text-white">{shot.title}</h2>
           <div className=" flex items-center justify-between ">
             <span className="group inline-block rounded-full bg-white mr-2 p-3 text-white cursor-pointer focus:outline-none">
               <svg
@@ -56,16 +60,18 @@ export default function ShotCard() {
         <div className="flex items-center ">
           <Image
             className="w-8 h-8 rounded-full"
-            src="https://images.unsplash.com/photo-1589561817940-caad53a2d007?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzZ8fGRlc2lnbmVyfGVufDB8fDB8fHww"
+            src={shot?.profile?.imageUrl}
             alt="Rounded avatar"
             width={32}
             height={32}
           />
 
-          <p className="ml-2 truncate text-sm">Mihai Dolganiuc</p>
-          <span className="bg-gray-300 uppercase mx-2 px-1 text-xs font-medium rounded-sm text-white">
-            pro
-          </span>
+          <p className="ml-2 truncate text-sm">{shot?.profile.name}</p>
+          {shot?.profile?.stripeCustomerId && (
+            <span className="bg-gray-300 uppercase mx-2 px-1 text-xs font-medium rounded-sm text-white">
+              pro
+            </span>
+          )}
         </div>
         <div className="flex items-center">
           <button className="flex items-center rounded-full bg-white ml-2 text-white cursor-pointer focus:outline-none">

@@ -110,7 +110,7 @@ export default function SideDrawer() {
       }`}
     >
       <div className="flex w-full h-screen shadow-2xl">
-        <div className="w-80 p-8 overflow-y-auto h-full">
+        <div className="w-full xl:w-80 p-8 overflow-y-auto h-full">
           <button onClick={toggleDrawer} className="text-sm">
             Close
           </button>

@@ -1,14 +1,21 @@
-import ShotCard from "../../../../../../components/Home/ShotCard";
-import ButtonBage from "../../../../../../components/shared/ButtonBage";
-import ButtonTabListFilter from "../../../../../../components/Hiring/ButtonTabListFilter";
-import {
-  Heading1,
-  Heading2,
-} from "../../../../../../components/shared/Headings";
-import HugeSearch from "../../../../../../components/shared/HugeSearch";
 import React from "react";
 
-export default function PopularShots() {
+import ShotCard from "@/components/Home/ShotCard";
+import HugeSearch from "@/components/shared/HugeSearch";
+import ButtonBage from "@/components/shared/ButtonBage";
+import { Heading1, Heading2 } from "@/components/shared/Headings";
+import ButtonTabListFilter from "@/components/Hiring/ButtonTabListFilter";
+
+export default async function PopularShots() {
+  const shots = await prisma?.shot.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 8,
+    include: {
+      profile: true,
+    },
+  });
   return (
     <div className="">
       <div className="flex flex-col items-center justify-center text-center space-y-4 w-full max-w-4xl mx-auto">
@@ -41,9 +48,7 @@ export default function PopularShots() {
       </div>
       <ButtonTabListFilter />
       <div className="px-14 py-10 grid grid-cols-4 gap-8 ">
-        {[1, 3, 6, 8, 0, 9, 5, 34, 67, 80, 23].map((i) => (
-          <ShotCard key={i} />
-        ))}
+        {shots?.map((shot) => <ShotCard shot={shot} key={shot.id} />)}
       </div>
     </div>
   );

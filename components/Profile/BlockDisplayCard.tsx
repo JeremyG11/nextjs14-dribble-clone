@@ -34,7 +34,7 @@ export default function BlockDisplayCard() {
             return block.files.map((file, index) => (
               <div
                 onClick={() => handleFileClick(blockKey as BlockType)}
-                className={`relative w-full h-screen mx-auto border-2 rounded-xl p-4 border-pink-500 transition-all duration-200 ease-in-out ${
+                className={`relative w-full h-96 xl:h-screen mx-auto border-2 rounded-xl p-4 border-pink-500 transition-all duration-200 ease-in-out ${
                   layout === "layout1" ? "max-w-3xl" : "max-w-7xl"
                 }`}
                 key={`${blockKey}-${index}`}

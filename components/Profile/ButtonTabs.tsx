@@ -2,10 +2,13 @@
 import React, { useState } from "react";
 import { Button } from "../shared/Button";
 import ShotCard from "../Home/ShotCard";
-import DropDown from "../shared/DropDown";
 import DropDownButton from "../shared/DropDownButton";
+import { ShotWithProfile } from "@/libs/definitions";
 
-export default function ButtonTabs() {
+interface ButtonTabsProps {
+  shots: ShotWithProfile[];
+}
+export default function ButtonTabs({ shots }: ButtonTabsProps) {
   const [isOpened, setIsOpened] = useState(false);
 
   return (
@@ -61,9 +64,9 @@ export default function ButtonTabs() {
         </nav>
       </div>
       <div className="grid grid-cols-4 gap-8">
-        {[3, 6, 8, 7, 34, 9].map((btn, i) => (
+        {shots.map((shot, i) => (
           <div key={i}>
-            <ShotCard key={btn} />
+            <ShotCard shot={shot} key={shot.id} />
           </div>
         ))}
       </div>

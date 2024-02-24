@@ -42,7 +42,7 @@ const FileUploader = ({ onFilesChange }: FileUploaderProps) => {
     <div className="relative w-full h-full">
       <label
         htmlFor="dropzone-file"
-        className="relative p-3 max-w-5xl mx-auto flex flex-col justify-center w-full h-screen border-2 border-gray-300 border-dashed rounded-lg cursor-pointer"
+        className="relative p-3 max-w-5xl mx-auto flex flex-col justify-center w-full xl:h-screen border-2 border-gray-300 border-dashed rounded-lg cursor-pointer"
       >
         <div className="z-30 flex flex-col items-center justify-center pt-5 pb-6 space-y-8">
           <div className="flex flex-col items-center justify-center space-y-3">
@@ -53,12 +53,12 @@ const FileUploader = ({ onFilesChange }: FileUploaderProps) => {
                 Browse
               </span>
             </p>
-            <p className=" text-gray-500">
+            <p className=" text-center md:text-left text-gray-500">
               Minimum 1600px width recommended. Max 10MB each (20MB for videos)
             </p>
           </div>
 
-          <ul className="w-full mt-8 space-y-1 flex items-center justify-evenly text-gray-500 list-disc list-inside ">
+          <ul className="w-full px-4 md:px-0 md:space-x-0 mt-8 space-y-1 md:flex md:items-center md:justify-evenly text-gray-500 list-disc list-inside ">
             <div>
               <li>High resolution images (png, jpg, gif)</li>
               <li>Animated gifs</li>

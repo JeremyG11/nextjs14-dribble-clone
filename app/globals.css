@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600;8..60,700;8..60,800&display=swap");
-
 @font-face {
   font-family: "Mona Sans";
   src: url("/fonts/mona-sans-cufonfonts/Mona-Sans-Regular.ttf")

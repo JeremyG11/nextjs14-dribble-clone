@@ -1,6 +1,7 @@
 import { Source_Serif_4 } from "next/font/google";
 import { redirectToSignIn } from "@clerk/nextjs";
 
+import { prisma } from "@/libs/prisma";
 import Navbar from "@/components/Navbar";
 import { getAuthUser } from "@/libs/auth.user";
 import Badge from "@/components/shared/Badge";
@@ -20,6 +21,13 @@ export default async function Home() {
   if (!profile) {
     return redirectToSignIn();
   }
+  const shots = await prisma?.shot.findMany({
+    take: 8,
+    include: {
+      profile: true,
+    },
+  });
+  console.log(shots);
   return (
     <>
       <Navbar profile={profile} />
@@ -60,8 +68,8 @@ export default async function Home() {
             Explore inspiring designs
           </h1>
           <div className="grid grid-cols-4 gap-8 p-8 lg:px-14 ">
-            {[1, 3, 6, 8, 0, 9, 5, 34, 67, 80, 23].map((i) => (
-              <ShotCard key={i} />
+            {shots.map((shot) => (
+              <ShotCard shot={shot} key={shot.id} />
             ))}
           </div>
           <div className="py-8 flex items-center justify-center">

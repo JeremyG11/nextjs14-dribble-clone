@@ -20,7 +20,7 @@ export const createStripeBillingSession = async ({
   userId,
   email,
 }: createStripeBillingSessionProps) => {
-  const billing_url = baseURL("/billing");
+  const billing_url = baseURL("/pro");
   if (isSubscribed && stripeCustomerId && isCurrentPlan) {
     const session = await stripe.billingPortal.sessions.create({
       customer: stripeCustomerId,
