@@ -2,14 +2,16 @@
 import { z } from "zod";
 import Image from "next/image";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Profile } from "@prisma/client";
 import { cn } from "@/libs/utils/tw.util";
+import { uploadFiles } from "@/libs/uploadthing";
 import { Button } from "@/components/shared/Button";
 import TextField from "@/components/shared/TextField";
 import InputField from "@/components/shared/InputField";
+import { updateUserProfilePicture } from "@/libs/actions/profile.actions";
 
 interface GeneralProps {
   profile: Profile;
@@ -20,14 +22,29 @@ export const EditProfileBlock: React.FC<GeneralProps> = ({ profile }) => {
   const profileImageSchema = z.object({
     imageUrl: z.string().url(),
   });
-  const { formState, handleSubmit } = useForm({
+  const { handleSubmit, control, formState } = useForm({
+    defaultValues: {
+      imageUrl: "",
+    },
     resolver: zodResolver(profileImageSchema),
   });
+  const [files, setFiles] = useState<File[]>([]);
 
-  const onSubmit = async (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: z.infer<typeof profileImageSchema>) => {
+    console.log("Form submitted");
+
+    try {
+      const imageUrls = await uploadFiles("imageUploader", { files });
+      const imageUrl = imageUrls[0]?.url;
+      console.log("imageUrl", imageUrl);
+      if (imageUrl) {
+        await updateUserProfilePicture({ imageUrl: imageUrl });
+      }
+      console.log(data);
+    } catch (error: any) {
+      console.error(error.message);
+    }
   };
-
   return (
     <div className="space-y-4 py-8">
       <div className={cn("flex items-center mb-4", toggle && "")}>
@@ -52,15 +69,41 @@ export const EditProfileBlock: React.FC<GeneralProps> = ({ profile }) => {
       </div>
       {toggle && (
         <form onSubmit={handleSubmit(onSubmit)} className="flex items-center">
-          <input
-            type="file"
-            className="block cursor-pointer w-full max-w-sm px-3 py-5 mt-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full"
+          <Controller
+            control={control}
+            name="imageUrl"
+            render={({ field: { onChange, onBlur, value, ref } }) => {
+              const handleFileChange = (
+                e: React.ChangeEvent<HTMLInputElement>
+              ) => {
+                if (e.target.files) {
+                  setFiles([e.target.files[0]]);
+                }
+                onChange(e);
+              };
+
+              return (
+                <div className="flex items-center">
+                  <input
+                    type="file"
+                    onChange={handleFileChange}
+                    className="block cursor-pointer w-full max-w-sm px-3 py-5 mt-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full"
+                  />
+                  {formState.errors.imageUrl && <p>Error</p>}
+                </div>
+              );
+            }}
           />
+
           <Button
+            type="submit"
             disabled={formState.isSubmitting}
-            className="text-sm py-2 mx-3 px-6 font-semibold text-gray-900  xl:block rounded-full bg-gray-100"
+            className={cn(
+              "text-sm py-2 mx-3 px-6 font-semibold text-gray-900  xl:block rounded-full bg-gray-100",
+              formState.isSubmitting && "bg-gray-300 cursor-not-allowed"
+            )}
           >
-            Upload Now
+            {formState.isSubmitting ? "Uploading" : "Upload Now"}
           </Button>
         </form>
       )}
@@ -74,11 +117,15 @@ export const EditProfileBlock: React.FC<GeneralProps> = ({ profile }) => {
         placeholder={profile?.address || "eg. Addis Ababa"}
       />
       <TextField rows={4} label="Bio" />
-
-      <h2 className="mt-10">ONLINE PRESENCE</h2>
-      <Button className="text-sm py-2.5 mx-3 px-6 font-semibold text-white  xl:block rounded-full bg-gray-800">
-        Save profile
-      </Button>
+      <h2 className="pt-10 pb-5  my-4 border-b font-semibold text-xs tracking-widest uppercase">
+        ONLINE PRESENCE
+      </h2>
+      <InputField label="Personal website" placeholder="" />
+      <div className="flex items-center pt-4 justify-end">
+        <Button className="text-sm py-2.5 px-6 font-semibold text-white  xl:block rounded-full bg-gray-800">
+          Save profile
+        </Button>
+      </div>
     </div>
   );
 };

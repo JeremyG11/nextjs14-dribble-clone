@@ -30,10 +30,13 @@ export default function EditNavbar({
       </div>
       <Link
         href="/pro"
-        className="border h-[60px] rounded py-2 md:py-0 md:px-10 flex items-center justify-center flex-col hover:bg-gray-100 hover:text-primary"
+        className="group border h-[60px] rounded py-2 md:py-0 md:px-10 flex items-center justify-center flex-col hover:text-white hover:bg-orange-pink-gradient transition-all duration-150 ease-linear"
       >
         <p>
-          Go<span className="mx-2 text-primary font-bold">Pro</span>
+          Go
+          <span className="mx-2 text-primary group-hover:text-white font-bold">
+            Pro
+          </span>
         </p>
         <p className="text-sm">Get 3x more portfolio views</p>
       </Link>

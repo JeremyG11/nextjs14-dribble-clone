@@ -18,6 +18,8 @@ const config: Config = {
         "rose-gradient":
           "linear-gradient(rgb(255, 245, 252) 0%, rgb(245, 209, 235) 100%)",
         "pink-aqua-gradient": "linear-gradient(90deg,#F7E9F3 0%,#E0DFFC 100%);",
+        "orange-pink-gradient":
+          "linear-gradient(45deg,#ff5e00 0%,#e6007e 100%);",
       },
       translate: {
         "1/2": "50%",

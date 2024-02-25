@@ -1,11 +1,14 @@
-import { auth } from "@clerk/nextjs";
 import { prisma } from "@/libs/prisma";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { currentUser, getAuth } from "@clerk/nextjs/server";
 
-export async function PATCH(req: Request) {
+export async function PATCH(req: NextRequest) {
   try {
-    const { userId } = auth();
+    const { userId } = getAuth(req);
+
+    const user = await currentUser();
     const updates = await req.json();
+    console.log("UserId", user, userId);
     if (!userId) {
       throw new Error("Unauthorized");
     }
