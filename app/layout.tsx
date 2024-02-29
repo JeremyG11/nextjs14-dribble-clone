@@ -1,7 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ourFileRouter } from "./api/uploadthing/core";
+import { extractRouterConfig } from "uploadthing/server";
+import AuthProvider from "@/components/Providers/auth.provider";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { ModalProvider } from "@/components/Providers/modal.provider";
 
 export const metadata: Metadata = {
@@ -19,13 +22,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className={myFont.className}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={myFont.className}>
+        <AuthProvider>
           <ModalProvider />
+          <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
           {children}
-        </body>
-      </html>
-    </ClerkProvider>
+        </AuthProvider>
+      </body>
+    </html>
   );
 }

@@ -1,7 +1,7 @@
-import { Profile, Shot } from "@prisma/client";
+import { User, Shot } from "@prisma/client";
 
 export type ShotWithProfile = Shot & {
-  profile: Profile;
+  user: User;
 };
 
 export type Uploader = "imageUploader" | "videoUploader" | "galleryUploader";

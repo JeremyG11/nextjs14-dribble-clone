@@ -3,22 +3,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-import { authProfile } from "@/libs/auth.user";
 import { Button } from "@/components/shared/Button";
 import DropDown from "@/components/shared/DropDown";
 import TooltipButton from "@/components/shared/Tooltip";
 import ButtonTabs from "@/components/Profile/ButtonTabs";
+import { currentUser } from "@/libs/auth/getCurrentUser";
 import EditButton from "@/components/Profile/Edit/EditButton";
 
 export default async function Profile() {
-  const profile = await authProfile();
+  const profile = await currentUser();
   if (!profile) {
-    return redirect("/sign-in");
+    return redirect("/signin");
   }
   const shots = await prisma?.shot.findMany({
     take: 8,
     include: {
-      profile: true,
+      user: true,
     },
   });
 
@@ -26,7 +26,12 @@ export default async function Profile() {
     <main>
       <div className="py-14 flex justify-center max-w-screen-xl mx-auto px-4  md:px-8 ">
         <div className="relative rounded-full h-10 w-10 xl:w-32 xl:h-32 xl:mx-10">
-          <Image src={profile.imageUrl} alt="" className="rounded-full" fill />
+          <Image
+            src={profile.image as string}
+            alt=""
+            className="rounded-full"
+            fill
+          />
         </div>
 
         <div className="py-3">

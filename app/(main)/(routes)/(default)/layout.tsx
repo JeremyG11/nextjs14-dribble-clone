@@ -1,18 +1,20 @@
 import React from "react";
+import { redirect } from "next/navigation";
 
-import Navbar from "../../../../components/Navbar";
-import Footer from "../../../../components/Footer/Footer";
-import { authProfile } from "@/libs/auth.user";
-import { redirectToSignIn } from "@clerk/nextjs";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer/Footer";
+import { currentUser } from "@/libs/auth/getCurrentUser";
+
 export default async function DefaultLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const profile = await authProfile();
+  const profile = await currentUser();
   if (!profile) {
-    return redirectToSignIn();
+    redirect("/signin");
   }
+  console.log(profile);
   return (
     <div>
       <Navbar profile={profile} />

@@ -1,6 +1,6 @@
+import { auth } from "@/auth";
 import { stripe } from "./stripe";
 import { prisma } from "./prisma";
-import { auth } from "@clerk/nextjs";
 
 export interface SubscriptionPlanProps {
   type: string;
@@ -17,9 +17,9 @@ export const proSubscriptionPlans: SubscriptionPlanProps[] = [
 ];
 
 export async function getUserSubscriptionPlan() {
-  const { userId } = auth();
+  const session = await auth();
 
-  if (!userId) {
+  if (!session) {
     throw new Error("User not found.");
   }
 
@@ -27,9 +27,9 @@ export async function getUserSubscriptionPlan() {
     process.env.STRIPE_ANUAL_PRO_PRICE_ID,
     "process.env.STRIPE_ANUAL_PRO_PRICE_ID"
   );
-  const profile = await prisma.profile.findFirst({
+  const profile = await prisma.user.findFirst({
     where: {
-      userId: userId,
+      id: session?.user?.id,
     },
   });
 

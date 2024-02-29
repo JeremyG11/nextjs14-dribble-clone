@@ -17,7 +17,7 @@ export default function ShotCard({ shot }: ShotCardProps) {
           backgroundImage: `url(${bgImage})`,
         }}
       >
-        <div className=" hidden group-hover:flex items-center justify-between w-full py-6 overflow-hidden rounded-b-lg cursor-pointer group-hover:bg-gradient-to-t from-zinc-600 via-zinc-400 to-transparent transition-all duration-150">
+        <div className="px-2 opacity-0 group-hover:opacity-100 flex items-center justify-between w-full py-6 overflow-hidden rounded-b-lg cursor-pointer group-hover:bg-gradient-to-t from-zinc-600 via-zinc-400 to-transparent transform transition-all duration-300">
           <h2 className=" truncate capitalize text-white">{shot.title}</h2>
           <div className=" flex items-center justify-between ">
             <span className="group inline-block rounded-full bg-white mr-2 p-3 text-white cursor-pointer focus:outline-none">
@@ -60,14 +60,14 @@ export default function ShotCard({ shot }: ShotCardProps) {
         <div className="flex items-center ">
           <Image
             className="w-8 h-8 rounded-full"
-            src={shot?.profile?.imageUrl}
+            src={shot?.user?.image as string}
             alt="Rounded avatar"
             width={32}
             height={32}
           />
 
-          <p className="ml-2 truncate text-sm">{shot?.profile.name}</p>
-          {shot?.profile?.stripeCustomerId && (
+          <p className="ml-2 truncate text-sm">{shot?.user.name}</p>
+          {shot?.user?.stripeCustomerId && (
             <span className="bg-gray-300 uppercase mx-2 px-1 text-xs font-medium rounded-sm text-white">
               pro
             </span>

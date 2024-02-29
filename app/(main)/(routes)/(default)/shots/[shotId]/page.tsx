@@ -12,7 +12,7 @@ export default async function ShotPage({
       id: params.shotId,
     },
     include: {
-      profile: true,
+      user: true,
     },
   });
   if (!shot) {

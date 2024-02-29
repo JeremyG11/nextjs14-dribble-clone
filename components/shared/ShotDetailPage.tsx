@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { LuMail } from "react-icons/lu";
 import React, { useEffect, useState } from "react";
 
@@ -50,7 +49,7 @@ export default function ShotDetailPage({ shot }: ShotDetailPageProps) {
         </h1>
         <div className="lg:max-w-5xl py-2 md:py-0 md:gap-x-14 justify-between items-center max-w-screen-xl md:mx-auto flex ">
           <div className="flex items-center flex-row-reverse justify-between md:py-5 md:block">
-            <ProfileStatus profile={shot.profile} />
+            <ProfileStatus profile={shot.user} />
           </div>
           <ul className="flex justify-center items-center space-x-2 md:space-x-3 md:space-y-0">
             <li className="text-gray-700 border rounded-full hover:text-gray-900">
@@ -78,10 +77,10 @@ export default function ShotDetailPage({ shot }: ShotDetailPageProps) {
       </div>
       <div className="mx-auto lg:max-w-5xl lg:my-20">
         <DividerLine>
-          <Avatar imageUrl={shot.profile.imageUrl} className="w-20 h-20 " />
+          <Avatar imageUrl={shot.user.image as string} className="w-20 h-20 " />
         </DividerLine>
         <div className="space-y-4 flex flex-col items-center justify-center mt-4">
-          <h2 className="text-xl font-medium">{shot.profile.name}</h2>
+          <h2 className="text-xl font-medium">{shot.user.name}</h2>
           <p className="text-sm text-gray-500">
             Welcome to my design portfolio on Dribbble
           </p>

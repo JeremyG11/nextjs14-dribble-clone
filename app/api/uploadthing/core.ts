@@ -1,22 +1,17 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@/auth";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 
 const f = createUploadthing();
-
-const authentication = (req: Request) => {
-  const { userId }: { userId: string | null } = auth();
-  console.log(userId);
-  if (!userId) {
-    throw new Error("Unauthorized");
-  }
-  return { id: userId };
-};
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
   imageUploader: f({ image: { maxFileSize: "4MB" } })
     .middleware(async ({ req }) => {
-      const user = authentication(req);
+      const session = await auth();
+      const user = session?.user;
+
+      if (!user) throw new Error("Unauthorized");
+
       return { userId: user.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
@@ -24,7 +19,10 @@ export const ourFileRouter = {
     }),
   videoUploader: f({ video: { maxFileSize: "64MB" } })
     .middleware(async ({ req }) => {
-      const user = authentication(req);
+      const session = await auth();
+      const user = session?.user;
+
+      if (!user) throw new Error("Unauthorized");
 
       return { userId: user.id };
     })
@@ -33,7 +31,10 @@ export const ourFileRouter = {
     }),
   galleryUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 10 } })
     .middleware(async ({ req }) => {
-      const user = authentication(req);
+      const session = await auth();
+      const user = session?.user;
+
+      if (!user) throw new Error("Unauthorized");
 
       return { userId: user.id };
     })

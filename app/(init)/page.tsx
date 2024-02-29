@@ -1,15 +1,14 @@
 import { Source_Serif_4 } from "next/font/google";
-import { redirectToSignIn } from "@clerk/nextjs";
 
 import { prisma } from "@/libs/prisma";
 import Navbar from "@/components/Navbar";
-import { getAuthUser } from "@/libs/auth.user";
 import Badge from "@/components/shared/Badge";
 import Footer from "@/components/Footer/Footer";
 import ShotCard from "@/components/Home/ShotCard";
 import CTAHome1 from "@/components/Home/CTAHome1";
 import { Button } from "@/components/shared/Button";
 import { InfiniteScrollCards } from "@/components/Home/InfiniteScrollCards";
+import { currentUser } from "@/libs/auth/getCurrentUser";
 
 const font = Source_Serif_4({
   subsets: ["greek"],
@@ -17,17 +16,14 @@ const font = Source_Serif_4({
 });
 
 export default async function Home() {
-  const profile = await getAuthUser();
-  if (!profile) {
-    return redirectToSignIn();
-  }
   const shots = await prisma?.shot.findMany({
     take: 8,
     include: {
-      profile: true,
+      user: true,
     },
   });
-  console.log(shots);
+  const profile = await currentUser();
+
   return (
     <>
       <Navbar profile={profile} />

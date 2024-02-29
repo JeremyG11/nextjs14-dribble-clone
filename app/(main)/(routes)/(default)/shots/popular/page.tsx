@@ -13,7 +13,7 @@ export default async function PopularShots() {
     },
     take: 8,
     include: {
-      profile: true,
+      user: true,
     },
   });
   return (

@@ -5,26 +5,25 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Profile } from "@prisma/client";
+import { User } from "@prisma/client";
 import { cn } from "@/libs/utils/tw.util";
 import { uploadFiles } from "@/libs/uploadthing";
 import { Button } from "@/components/shared/Button";
 import TextField from "@/components/shared/TextField";
 import InputField from "@/components/shared/InputField";
 import { updateUserProfilePicture } from "@/libs/actions/profile.actions";
+import { profileImageSchema } from "@/schemas/ProfileSchema";
 
 interface GeneralProps {
-  profile: Profile;
+  profile: User;
 }
 
 export const EditProfileBlock: React.FC<GeneralProps> = ({ profile }) => {
   const [toggle, setToggle] = useState(false);
-  const profileImageSchema = z.object({
-    imageUrl: z.string().url(),
-  });
+
   const { handleSubmit, control, formState } = useForm({
     defaultValues: {
-      imageUrl: "",
+      image: "",
     },
     resolver: zodResolver(profileImageSchema),
   });
@@ -36,9 +35,8 @@ export const EditProfileBlock: React.FC<GeneralProps> = ({ profile }) => {
     try {
       const imageUrls = await uploadFiles("imageUploader", { files });
       const imageUrl = imageUrls[0]?.url;
-      console.log("imageUrl", imageUrl);
       if (imageUrl) {
-        await updateUserProfilePicture({ imageUrl: imageUrl });
+        await updateUserProfilePicture({ image: imageUrl });
       }
       console.log(data);
     } catch (error: any) {
@@ -49,7 +47,12 @@ export const EditProfileBlock: React.FC<GeneralProps> = ({ profile }) => {
     <div className="space-y-4 py-8">
       <div className={cn("flex items-center mb-4", toggle && "")}>
         <div className="relative rounded-full h-20 w-20">
-          <Image src={profile.imageUrl} alt="" className="rounded-full" fill />
+          <Image
+            src={profile.image as string}
+            alt=""
+            className="rounded-full"
+            fill
+          />
         </div>
         <div className="mx-4 ">
           {!toggle ? (
@@ -71,7 +74,7 @@ export const EditProfileBlock: React.FC<GeneralProps> = ({ profile }) => {
         <form onSubmit={handleSubmit(onSubmit)} className="flex items-center">
           <Controller
             control={control}
-            name="imageUrl"
+            name="image"
             render={({ field: { onChange, onBlur, value, ref } }) => {
               const handleFileChange = (
                 e: React.ChangeEvent<HTMLInputElement>
@@ -89,7 +92,7 @@ export const EditProfileBlock: React.FC<GeneralProps> = ({ profile }) => {
                     onChange={handleFileChange}
                     className="block cursor-pointer w-full max-w-sm px-3 py-5 mt-2 text-sm text-gray-600 bg-white border border-gray-200 rounded-lg file:bg-gray-200 file:text-gray-700 file:text-sm file:px-4 file:py-1 file:border-none file:rounded-full"
                   />
-                  {formState.errors.imageUrl && <p>Error</p>}
+                  {formState.errors.image && <p>Error</p>}
                 </div>
               );
             }}

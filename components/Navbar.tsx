@@ -1,19 +1,20 @@
 "use client";
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { VscChromeClose } from "react-icons/vsc";
+
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 
 import Logo from "./shared/Logo";
 import useMount from "@/hooks/mount";
-import { Profile } from "@prisma/client";
+import Avatar from "./shared/Avatar";
+import { User } from "@prisma/client";
 import SearchBar from "./Home/SearchBar";
 import { Button } from "./shared/Button";
 
 interface NavbarProps {
-  profile: Profile | null;
+  profile: User | null;
 }
 export default function Navbar({ profile }: NavbarProps) {
   const [state, setState] = useState(false);
@@ -22,9 +23,11 @@ export default function Navbar({ profile }: NavbarProps) {
     document.onclick = (e) => {
       const target = e.target;
     };
-  }, []);
+  }, [profile]);
+
   const mount = useMount();
   if (!mount) return null;
+
   return (
     <nav className={`bg-white md:text-sm p-4 `}>
       <div className="md:gap-x-14 justify-between items-center max-w-screen-xl md:mx-auto flex ">
@@ -89,7 +92,7 @@ export default function Navbar({ profile }: NavbarProps) {
         <div className="flex p-2 space-x-2 gap-x-2 md:gap-x-6 items-center justify-end space-y-0 md:flex md:space-y-0 md:mt-0">
           <SearchBar />
           <>
-            {profile?.userId ? (
+            {profile && profile.image ? (
               <>
                 <Button
                   onClick={() => router.push("/uploads/new")}
@@ -97,20 +100,19 @@ export default function Navbar({ profile }: NavbarProps) {
                 >
                   Share work
                 </Button>
-                <div className="rounded-full h-10 w-10 xl:w-11 xl:h-11">
-                  <UserButton
-                    afterSignOutUrl="/"
-                    appearance={{
-                      elements: {
-                        avatarBox: "w-full h-full",
-                      },
-                    }}
+                <div
+                  onClick={() => router.push(`/profile/${profile.id}/`)}
+                  className="rounded-full h-10 w-10 xl:w-11 xl:h-11"
+                >
+                  <Avatar
+                    imageUrl={profile.image}
+                    className="w-10 h-10 relative cursor-pointer"
                   />
                 </div>
               </>
             ) : (
               <>
-                <Link href="/sign-in">Login</Link>
+                <Link href="/signin">Login</Link>
                 <Button
                   onClick={() => router.push("/uploads/new")}
                   className="hidden py-3 px-6 font-medium bg-primary text-white  xl:block rounded-full border border-gray-200 hover:opacity-60"

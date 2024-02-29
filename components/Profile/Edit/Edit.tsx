@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Profile } from "@prisma/client";
+import { User } from "@prisma/client";
 
 import EditNavbar from "./EditNavbar";
 import EditNavLink from "./EditNavLink";
@@ -8,7 +8,7 @@ import FieldsRenderer from "./FieldsRenderer";
 import { EditNavLinks } from "@/libs/definitions";
 
 interface EditProps {
-  profile: Profile;
+  profile: User;
 }
 export default function EditContent({ profile }: EditProps) {
   const [activeLink, setActiveLink] = useState<EditNavLinks>("General");

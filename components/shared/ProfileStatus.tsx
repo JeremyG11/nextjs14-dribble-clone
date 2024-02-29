@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import { Profile } from "@prisma/client";
+import { User } from "@prisma/client";
 
 import { PingAnimate } from "./ShotDetailPage";
 
 interface ProfileStatusProps {
-  profile: Profile;
+  profile: User;
 }
 
 export default function ProfileStatus({ profile }: ProfileStatusProps) {
@@ -13,7 +13,7 @@ export default function ProfileStatus({ profile }: ProfileStatusProps) {
     <div>
       <div className="flex items-center">
         <div className="relative object-cover w-10 h-10 rounded-full overflow-hidden">
-          <Image src={profile.imageUrl} alt="" fill />
+          <Image src={profile.image as string} alt="" fill />
         </div>
 
         <div className="mx-3">

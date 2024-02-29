@@ -1,23 +1,21 @@
 import React from "react";
 import Link from "next/link";
-import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { MdOutlineDone } from "react-icons/md";
 
-import { authProfile } from "@/libs/auth.user";
 import { proFeaturesData } from "@/libs/constants";
 import SubcriptionFrom from "../pro/SubcriptionFrom";
+import { currentUser } from "@/libs/auth/getCurrentUser";
 import { getUserSubscriptionPlan } from "@/libs/billingPlan";
 
 export default async function BillingCardTwo() {
   const plan = await getUserSubscriptionPlan();
-  const { user, userId } = auth();
-  const profile = await authProfile();
+  const profile = await currentUser();
 
   if (!profile) {
-    return redirect("/sign-in");
+    return redirect("/signin");
   }
-  if (!userId) {
+  if (!profile) {
     return null;
   }
   console.log("Profile planQ", plan);
@@ -44,7 +42,7 @@ export default async function BillingCardTwo() {
       </ul>
 
       <SubcriptionFrom
-        userId={userId}
+        userId={profile.id}
         email={profile.email || ""}
         stripePriceId={process.env.STRIPE_ANUAL_PRO_PRICE_ID ?? ""}
         stripeCustomerId={plan?.stripeCustomerId}

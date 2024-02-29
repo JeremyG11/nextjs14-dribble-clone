@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Profile } from "@prisma/client";
+import { User } from "@prisma/client";
 import { General } from "./EditBlocks/Edit.general";
 import { EditProfileBlock } from "./EditBlocks/Edit.profile";
 
@@ -16,7 +16,7 @@ type FieldsRendererProps = {
     | "Applications"
     | "Data Export"
     | "Delete Account";
-  profile: Profile;
+  profile: User;
 };
 
 export default function FieldsRenderer({

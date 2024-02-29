@@ -1,10 +1,10 @@
 import React from "react";
-import Image from "next/image";
-import { Profile } from "@prisma/client";
 import Link from "next/link";
+import Image from "next/image";
+import { User } from "@prisma/client";
 
 interface EditNavbarProps {
-  profile: Profile;
+  profile: User;
   title: string;
   subtitle: string;
 }
@@ -18,7 +18,12 @@ export default function EditNavbar({
     <div className="pt-14 flex space-y-2 flex-col-reverse md:flex-row justify-between max-w-5xl mx-auto px-4  md:px-8 ">
       <div className="flex py-4">
         <div className="relative rounded-full h-14 w-14">
-          <Image src={profile.imageUrl} alt="" className="rounded-full" fill />
+          <Image
+            src={profile.image as string}
+            alt=""
+            className="rounded-full"
+            fill
+          />
         </div>
         <div className="mx-4">
           <h3 className="text-xl text-black">

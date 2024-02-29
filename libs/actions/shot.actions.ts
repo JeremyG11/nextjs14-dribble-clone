@@ -1,15 +1,16 @@
 "use server";
-
-import { auth } from "@clerk/nextjs";
-import { prisma } from "@/libs/prisma";
-import { revalidatePath } from "next/cache";
-import { Shot, ShotFile, FileSchema, ShotSchema } from "@/schemas/ShotSchema";
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
+
+import { auth } from "@/auth";
+import { prisma } from "@/libs/prisma";
+import { ShotSchema } from "@/schemas/ShotSchema";
+import { currentUser } from "@/libs/auth/getCurrentUser";
 
 export const createShot = async (data: {}) => {
   try {
-    const { userId } = auth();
-    if (!userId) {
+    const user = await currentUser();
+    if (!user || !user.id) {
       throw new Error("Unauthorized");
     }
 
@@ -28,7 +29,7 @@ export const createShot = async (data: {}) => {
     // create a shot with draft status
     const shot = await prisma.shot.create({
       data: {
-        userId,
+        userId: user.id,
         title,
       },
     });
@@ -49,7 +50,10 @@ export const publishShot = async (
   gallery: any,
   atlTexts: { [key: string]: string[] }
 ) => {
-  const { userId } = auth();
+  const user = await currentUser();
+  if (!user || !user.id) {
+    throw new Error("Unauthorized");
+  }
   console.log("atlTexts", atlTexts);
   try {
     const shot = await prisma.shot.findFirst({
@@ -60,7 +64,8 @@ export const publishShot = async (
     if (!shot) {
       throw new Error("Shot not found");
     }
-    if (!userId || userId !== shot?.userId) {
+    const user = await currentUser();
+    if (!user || !user.id) {
       throw new Error("Unauthorized");
     }
     // updates

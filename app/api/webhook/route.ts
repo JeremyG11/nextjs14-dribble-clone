@@ -37,7 +37,7 @@ export async function POST(request: Request) {
       subscription.items.data[0].price.id,
       subscription.current_period_end
     );
-    await prisma.profile.update({
+    await prisma.user.update({
       where: {
         userId: session.metadata.userId,
       },
