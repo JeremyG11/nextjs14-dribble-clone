@@ -12,7 +12,7 @@ import { Button } from "@/components/shared/Button";
 import TextField from "@/components/shared/TextField";
 import InputField from "@/components/shared/InputField";
 import { updateUserProfilePicture } from "@/libs/actions/profile.actions";
-import { profileImageSchema } from "@/schemas/ProfileSchema";
+import { ProfileImageSchema } from "@/schemas/ProfileSchema";
 
 interface GeneralProps {
   profile: User;
@@ -25,11 +25,11 @@ export const EditProfileBlock: React.FC<GeneralProps> = ({ profile }) => {
     defaultValues: {
       image: "",
     },
-    resolver: zodResolver(profileImageSchema),
+    resolver: zodResolver(ProfileImageSchema),
   });
   const [files, setFiles] = useState<File[]>([]);
 
-  const onSubmit = async (data: z.infer<typeof profileImageSchema>) => {
+  const onSubmit = async (data: z.infer<typeof ProfileImageSchema>) => {
     console.log("Form submitted");
 
     try {

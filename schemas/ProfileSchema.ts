@@ -25,6 +25,8 @@ export const SigninSchema = z.object({
   code: z.optional(z.string()),
 });
 
-export const profileImageSchema = z.object({
-  image: z.string().url(),
+export const ProfileImageSchema = z.object({
+  image: z.string().url({
+    message: "Invalid image url",
+  }),
 });

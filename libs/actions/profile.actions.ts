@@ -7,20 +7,35 @@ import { prisma } from "@/libs/prisma";
 // import { sendVerificationEmail } from "@/lib/mail";
 // import { generateVerificationToken } from "@/lib/tokens";
 
-import axios from "axios";
 import { getUserByEmail } from "@/libs/auth";
-import { SignUpSchema } from "@/schemas/ProfileSchema";
+import { currentUser } from "../auth/getCurrentUser";
+import { SignUpSchema, ProfileImageSchema } from "@/schemas/ProfileSchema";
+import { revalidatePath } from "next/cache";
 
-export const updateUserProfilePicture = async (data: { image: string }) => {
-  const validatedFields = SignUpSchema.safeParse(data);
-  if (!validatedFields.success) {
-    console.log(validatedFields.error);
-  }
+export const updateUserProfilePicture = async (
+  values: z.infer<typeof ProfileImageSchema>
+) => {
   try {
-    const res = await axios.get(`http://localhost:3000/api/profile`, {
-      data,
+    const user = await currentUser();
+    if (!user) {
+      throw new Error("User not found!");
+    }
+    const validatedFields = ProfileImageSchema.safeParse(values);
+    if (!validatedFields.success) {
+      console.log(validatedFields.error);
+      return { error: "Invalid fields!" };
+    }
+    const { image } = validatedFields.data;
+    const updateProfile = await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        image,
+      },
     });
-    return res.data;
+    console.log(updateProfile);
+    revalidatePath("/profile/edit");
   } catch (error: any) {
     console.error("ERROR SERV", error.message);
   }
